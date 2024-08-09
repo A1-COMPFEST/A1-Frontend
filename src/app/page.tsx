@@ -4,9 +4,12 @@ import Gambar2 from "../../public/section3.png";
 import Image from "next/image";
 
 async function getPopularData() {
-  const response = await fetch("http://localhost:8000/api/courses/popular", {
-    cache: "no-cache",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/popular`,
+    {
+      cache: "no-cache",
+    }
+  );
   const data = await response.json();
   return data.courses;
 }
@@ -68,7 +71,7 @@ export default async function Home() {
           <div>
             <div className="flex flex-col md:flex-row items-start justify-start">
               <div className="w-full md:w-1/2 p-6">
-                <div className="bg-gray-100 rounded-lg p-4">
+                <div className="bg-secondary rounded-lg p-4">
                   <Image src={Gambar2} alt="" />
                 </div>
               </div>
