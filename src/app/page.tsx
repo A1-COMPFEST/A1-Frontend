@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Gambar from "../../public/gambar.png";
 import Gambar2 from "../../public/section3.png";
 import Image from "next/image";
+import CourseCard from "@/components/course-card";
 
 async function getPopularData() {
   const response = await fetch(
@@ -36,33 +37,14 @@ export default async function Home() {
         </h4>
         <div className="md:flex justify-center gap-5 mt-5">
           {popularCourses?.map((course: any) => (
-            <div
+            <CourseCard
               key={course.id}
-              className="bg-white shadow-md p-4 md:w-1/4 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-xl"
-            >
-              <Image
-                src={Gambar}
-                alt=""
-                width={1000}
-                height={1000}
-                className="md:w-full h-32 object-cover rounded-t-lg"
-              />
-              <div className="text-left grid mt-2 p-2">
-                <h5 className="text-lg font-bold text-gray-800">
-                  {course.name}
-                </h5>
-                <p className="text-muted-foreground text-sm py-1">
-                  {course.instructor.name}
-                </p>
-                <p className="font-semibold pb-2">4.0</p>
-                <p className="font-semibold">
-                  {course.price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
-                </p>
-              </div>
-            </div>
+              id={course.id}
+              name={course.name}
+              instructor_name={course.instructor_name}
+              price={course.price}
+              image={course.image}
+            />
           ))}
         </div>
       </section>
