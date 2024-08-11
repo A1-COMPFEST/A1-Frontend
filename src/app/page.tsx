@@ -44,6 +44,7 @@ export default async function Home() {
               instructor_name={course.instructor_name}
               price={course.price}
               image={course.image}
+              rating={course.average_rating}
             />
           ))}
         </div>

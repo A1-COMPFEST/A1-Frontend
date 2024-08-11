@@ -6,6 +6,7 @@ interface CourseCardProps {
   instructor_name: string;
   price: number;
   image: string;
+  rating: number;
 }
 
 export default function CourseCard({
@@ -14,6 +15,7 @@ export default function CourseCard({
   instructor_name,
   price,
   image,
+  rating,
 }: CourseCardProps) {
   return (
     <div
