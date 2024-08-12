@@ -10,7 +10,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 export default function CoursePage() {
     const { id } = useParams();
     const [activeTab, setActiveTab] = useState('assignments');
-    const [openAssignment, setOpenAssignment] = useState(null);
+    const [openAssignment, setOpenAssignment] = useState<number | null>(null);
 
     const course = courses.find(course => course.id === parseInt(id as string));
 
@@ -71,8 +71,8 @@ export default function CoursePage() {
                         <div className="flex-grow mb-4 md:mr-0.5 sm:mb-0">
                             <h3 className={`${lato.className} text-[#094C62] font-semibold`}>Course Final Project
                                 Assignment</h3>
-                            <p className="text-sm">As you approach the end of this course, it's time to put everything
-                                you've learned into practice</p>
+                            <p className="text-sm">As you approach the end of this course, it&apos;s time to put
+                                everything you&apos;ve learned into practice</p>
                         </div>
                         <div className="flex flex-col sm:flex-row w-full sm:w-auto">
                             <Button variant="outline"
@@ -86,9 +86,10 @@ export default function CoursePage() {
                         </div>
                         <div className="flex-grow mb-4 md:mr-10 sm:mb-0">
                             <h3 className={`${lato.className} text-[#094C62] font-semibold`}>Midterm Assignment</h3>
-                            <p className="text-sm">As you approach the half of this course, it's time to put everything
-                                you've learned into practice Test your knowledge As you approach the half of this course, it's time to put everything
-                                you've learned into practice Test your knowledge</p>
+                            <p className="text-sm">As you approach the half of this course, it&apos;s time to put
+                                everything you&apos;ve learned into practice Test your knowledge As you approach the
+                                half of this course, it&apos;s time to put everything you&apos;ve learned into practice
+                                Test your knowledge</p>
                         </div>
                         <div className="flex flex-col sm:flex-row w-full sm:w-auto">
                             <Button variant="outline"
