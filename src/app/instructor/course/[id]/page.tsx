@@ -1,7 +1,7 @@
 "use client"
 import { useParams } from 'next/navigation';
 import Image from "next/image";
-import { courses } from "@/app/dashboard/instructor/course-data";
+import { courses } from '../../course-data';
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { lato } from "@/components/ui/font";
