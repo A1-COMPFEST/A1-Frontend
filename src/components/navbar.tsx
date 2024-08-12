@@ -21,7 +21,7 @@ export default function Navbar({ isSignedIn }: { isSignedIn: boolean }) {
   console.log(isSignedIn);
 
   return (
-    <header className="top-0 flex h-16 items-center gap-4 border-b bg-background px-8 md:px-16">
+    <header className="top-0 flex h-16 items-center gap-4 bg-background px-2 sm:px-4 md:px-6 lg:px-12 lg:py-10 xl:px-20">
       <Link href="/" className="flex-col items-center gap-2 overflow-hidden">
         <div className="flex items-end gap-2">
           <Image
