@@ -11,141 +11,148 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { FaStar } from "react-icons/fa";
 
+interface FilterAccordionProps {
+  categories: {
+    name: string;
+    id: number;
+  }[];
+}
+
 const ratings = [3, 4, 5];
 const difficulties = ["beginner", "intermediate", "professional"];
-const categories = ["programming", "math"];
 
-export default function FilterAccordion() {
+export default function FilterAccordion({ categories }: FilterAccordionProps) {
+  console.log(categories);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [filters, setFilters] = useState({
-    min_rating: [] as number[],
-    difficulty: [] as string[],
-    category: [] as string[],
-  });
+  const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
-  useEffect(() => {
-    const minRatingParam = searchParams.get("min_rating");
-    const difficultyParam = searchParams.get("difficulty");
-    const categoryParam = searchParams.get("category");
+  const addToUrl = (arr: any, param: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(param, arr.toString());
+    router.push(`?${params.toString()}`);
+  };
 
-    setFilters({
-      min_rating: minRatingParam ? minRatingParam.split(",").map(Number) : [],
-      difficulty: difficultyParam ? difficultyParam.split(",") : [],
-      category: categoryParam ? categoryParam.split(",") : [],
-    });
-  }, [searchParams]);
-
-  const updateFilters = (
-    filterType: keyof typeof filters,
-    value: string | number,
-    checked: boolean
-  ) => {
-    setFilters((prevFilters) => {
-      const updatedFilters = { ...prevFilters };
-      if (checked) {
-        // @ts-ignore
-        updatedFilters[filterType] = [...prevFilters[filterType], value];
+  const handleRatingChange = (rating: number) => {
+    setSelectedRatings((prevSelectedRatings) => {
+      console.log(selectedRatings);
+      if (prevSelectedRatings.includes(rating)) {
+        const newRatings = prevSelectedRatings.filter((r) => r !== rating);
+        addToUrl(newRatings, "min_rating");
+        return newRatings;
       } else {
-        // @ts-ignore
-        updatedFilters[filterType] = prevFilters[filterType].filter(
-          (item) => item !== value
-        );
+        const newRatings = [...prevSelectedRatings, rating];
+        addToUrl(newRatings, "min_rating");
+        return newRatings;
       }
-      return updatedFilters;
     });
   };
 
-  useEffect(() => {
-    // Update URL when filters change
-    const params = new URLSearchParams(searchParams.toString());
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value.length > 0) {
-        params.set(key, value.join(","));
+  const handleDifficultyChange = (difficulty: string) => {
+    setSelectedDifficulty((prevSelectedDifficulty) => {
+      if (prevSelectedDifficulty.includes(difficulty)) {
+        const newDiff = prevSelectedDifficulty.filter((d) => d !== difficulty);
+        addToUrl(newDiff, "difficulty");
+        return newDiff;
       } else {
-        params.delete(key);
+        const newDiff = [...prevSelectedDifficulty, difficulty];
+        addToUrl(newDiff, "difficulty");
+        return newDiff;
       }
     });
-    router.push(`?${params.toString()}`);
-  }, [filters, router]);
+  };
 
-  const isChecked = (
-    filterType: keyof typeof filters,
-    value: string | number
-  ) => {
-    // @ts-ignore
-    return filters[filterType].includes(value);
+  const handleCategoryChange = (category: number) => {
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(category)) {
+        const newCategories = prevSelectedCategories.filter(
+          (c) => c !== category
+        );
+        addToUrl(newCategories, "category_id");
+        return newCategories;
+      } else {
+        const newCategories = [...prevSelectedCategories, category];
+        addToUrl(newCategories, "category_id");
+        return newCategories;
+      }
+    });
   };
 
   return (
-    <Accordion type="multiple" className="w-full">
-      <AccordionItem value="min_rating">
-        <AccordionTrigger>Minimum Rating</AccordionTrigger>
-        <AccordionContent>
-          {ratings.map((rating) => (
-            <div className="flex items-center space-x-2 mb-2" key={rating}>
-              <Checkbox
-                id={`min_rating-${rating}`}
-                checked={isChecked("min_rating", rating)}
-                onCheckedChange={(checked) =>
-                  updateFilters("min_rating", rating, checked as boolean)
-                }
-              />
-              <Label
-                htmlFor={`min_rating-${rating}`}
-                className="flex items-center"
-              >
-                {Array.from({ length: rating }, (_, index) => (
-                  <FaStar key={index} className="text-yellow-500"/>
-                ))}
-              </Label>
-            </div>
-          ))}
-        </AccordionContent>
-      </AccordionItem>
+    <div>
+      <h2 className="pt-8 font-bold">Filter by</h2>
 
-      <AccordionItem value="difficulty">
-        <AccordionTrigger>Difficulty</AccordionTrigger>
-        <AccordionContent>
-          {difficulties.map((difficulty) => (
-            <div className="flex items-center space-x-2 mb-2" key={difficulty}>
-              <Checkbox
-                id={`difficulty-${difficulty}`}
-                checked={isChecked("difficulty", difficulty)}
-                onCheckedChange={(checked) =>
-                  updateFilters("difficulty", difficulty, checked as boolean)
-                }
-              />
-              <Label
-                htmlFor={`difficulty-${difficulty}`}
-                className="capitalize"
-              >
-                {difficulty}
-              </Label>
-            </div>
-          ))}
-        </AccordionContent>
-      </AccordionItem>
+      <Accordion type="multiple" className="w-full">
+        <AccordionItem value="min_rating">
+          <AccordionTrigger>Minimum Rating</AccordionTrigger>
+          <AccordionContent>
+            {ratings.map((rating) => (
+              <div className="flex items-center space-x-2 mb-2" key={rating}>
+                <Checkbox
+                  id={`min_rating-${rating}`}
+                  checked={selectedRatings.includes(rating)}
+                  onCheckedChange={() => handleRatingChange(rating)}
+                />
+                <Label
+                  htmlFor={`min_rating-${rating}`}
+                  className="flex items-center"
+                >
+                  {Array.from({ length: rating }, (_, index) => (
+                    <FaStar key={index} className="text-yellow-500" />
+                  ))}
+                </Label>
+              </div>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
 
-      <AccordionItem value="category">
-        <AccordionTrigger>Category</AccordionTrigger>
-        <AccordionContent>
-          {categories.map((category) => (
-            <div className="flex items-center space-x-2 mb-2" key={category}>
-              <Checkbox
-                id={`category-${category}`}
-                checked={isChecked("category", category)}
-                onCheckedChange={(checked) =>
-                  updateFilters("category", category, checked as boolean)
-                }
-              />
-              <Label htmlFor={`category-${category}`} className="capitalize">
-                {category}
-              </Label>
-            </div>
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+        <AccordionItem value="difficulty">
+          <AccordionTrigger>Difficulty</AccordionTrigger>
+          <AccordionContent>
+            {difficulties.map((difficulty) => (
+              <div
+                className="flex items-center space-x-2 mb-2"
+                key={difficulty}
+              >
+                <Checkbox
+                  id={`difficulty-${difficulty}`}
+                  checked={selectedDifficulty.includes(difficulty)}
+                  onCheckedChange={() => handleDifficultyChange(difficulty)}
+                />
+                <Label
+                  htmlFor={`difficulty-${difficulty}`}
+                  className="capitalize"
+                >
+                  {difficulty}
+                </Label>
+              </div>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="category">
+          <AccordionTrigger>Category</AccordionTrigger>
+          <AccordionContent>
+            {categories.map((category) => (
+              <div
+                className="flex items-center space-x-2 mb-2"
+                key={category.id}
+              >
+                <Checkbox
+                  id={`category-${category}`}
+                  checked={selectedCategories.includes(category.id)}
+                  onCheckedChange={() => handleCategoryChange(category.id)}
+                />
+                <Label htmlFor={`category-${category}`} className="capitalize">
+                  {category.name}
+                </Label>
+              </div>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 }

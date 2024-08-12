@@ -11,12 +11,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import CourseCard from "../course-card";
+import PaginationClient from "../pagination-client";
 
-const ITEMS_PER_PAGE = 8;
+
 
 interface PaginatedCourseListProps {
   courses: PurchasedCourse[];
-  total_courses: number;
   last_page: number;
   current_page: number;
 }
@@ -25,14 +25,7 @@ export default function PaginatedCourseList({
   last_page,
   current_page,
 }: PaginatedCourseListProps) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    router.push(`?${params.toString()}`);
-  };
+  
 
   return (
     <div className="max-w-screen-lg mx-auto text-center md:px-0 px-5">
@@ -50,40 +43,8 @@ export default function PaginatedCourseList({
           />
         ))}
       </div>
-      <Pagination className="mt-8">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() => handlePageChange(Math.max(1, current_page - 1))}
-              className={
-                current_page === 1 ? "pointer-events-none opacity-50" : ""
-              }
-            />
-          </PaginationItem>
-          {[...Array(last_page)].map((_, index) => (
-            <PaginationItem key={index}>
-              <PaginationLink
-                onClick={() => handlePageChange(index + 1)}
-                isActive={current_page === index + 1}
-              >
-                {index + 1}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext
-              onClick={() =>
-                handlePageChange(Math.min(last_page, current_page + 1))
-              }
-              className={
-                current_page === last_page
-                  ? "pointer-events-none opacity-50"
-                  : ""
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <PaginationClient last_page={last_page} current_page={current_page} />
+      
     </div>
   );
 }

@@ -8,12 +8,15 @@ import React from "react";
 import { Button } from "./ui/button";
 import { getUserToken, signOut } from "@/app/actions/auth-actions";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Navbar({ isSignedIn }: { isSignedIn: boolean }) {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
     router.refresh();
+    router.push("/");
+    toast.success("Signed out successfully!");
   };
   console.log(isSignedIn);
 
