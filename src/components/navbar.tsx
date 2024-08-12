@@ -14,8 +14,8 @@ export default function Navbar({ isSignedIn }: { isSignedIn: boolean }) {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
-    router.refresh();
     router.push("/");
+    router.refresh();
     toast.success("Signed out successfully!");
   };
   console.log(isSignedIn);
