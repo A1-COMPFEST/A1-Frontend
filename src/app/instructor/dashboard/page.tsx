@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { courses} from "@/app/dashboard/instructor/course-data";
+import { courses } from "../course-data";
 
 export default async function InstructorPage() {
     return (

@@ -102,3 +102,8 @@ export async function getUserToken() {
   console.log(tokenCookie.value);
   return tokenCookie.value;
 }
+
+export async function isLoggedIn() {
+  const token = await getUserToken();
+  return !!token;
+}

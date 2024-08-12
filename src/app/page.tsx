@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import CourseCard from "@/components/course-card";
+import Link from "next/link";
 
 async function getPopularData() {
   const response = await fetch(
@@ -25,7 +26,9 @@ export default async function Home() {
         <h4 className="text-lg mt-3">
           Acquire new skills and achieve your professional goals
         </h4>
-        <Button className="mt-8">Explore Courses</Button>
+        <Link href="/explore">
+          <Button className="mt-8">Explore Courses</Button>
+        </Link>
       </section>
       <section className="max-w-screen-lg mx-auto text-center py-44 md:px-0 px-5">
         <h2 className="text-3xl font-semibold">Most Popular Course</h2>
@@ -42,7 +45,7 @@ export default async function Home() {
               instructor_name={course.instructor_name}
               price={course.price}
               image={course.image}
-              rating={course.average_rating}
+              average_rating={course.average_rating}
             />
           ))}
         </div>

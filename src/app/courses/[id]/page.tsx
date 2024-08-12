@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import BuyCourseDialog from "@/components/course-detail/purchase-dialog";
 
 async function getCourseData(id: number) {
   const response = await fetch(
@@ -42,7 +43,7 @@ export default async function Page({ params }: { params: { id: number } }) {
             <h2 className="text-xl font-semibold mb-4">Description</h2>
             <p className="text-gray-700 mb-8">{course.description}</p>
 
-            <Button className="w-1/4 px-6 py-3 mt-auto text-xl">Buy now</Button>
+            <BuyCourseDialog />
           </div>
         </div>
       </div>
