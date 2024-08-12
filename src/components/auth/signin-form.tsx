@@ -1,5 +1,4 @@
-import * as React from "react";
-
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,8 +11,35 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { FormEvent } from "react";
+import { signIn } from "@/app/actions/auth-actions";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SigninForm() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    console.log(email, password);
+    const result = await signIn(email, password);
+    setLoading(false);
+
+    if (result.success) {
+      toast.success("Signed in successfully!");
+      router.push("/");
+    } else {
+      toast.error(result.error || "An error occurred");
+      console.log(result.error);
+    }
+  };
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -25,28 +51,34 @@ export default function SigninForm() {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form>
+      <form onSubmit={handleSubmit}>
+        <CardContent>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email" className="text-primary font-semibold">
                 Email
               </Label>
-              <Input id="email" placeholder="Enter your email" />
+              <Input name="email" placeholder="Enter your email" type="email"/>
             </div>
 
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password" className="text-primary font-semibold">
                 Password
               </Label>
-              <Input id="password" placeholder="Enter your password" />
+              <Input
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+              />
             </div>
           </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-cente pt-8 ">
-        <Button className="w-full">Sign In</Button>
-      </CardFooter>
+        </CardContent>
+        <CardFooter className="flex justify-cente pt-8 ">
+          <Button type="submit" className="w-full" disabled={loading}>
+            Sign In
+          </Button>
+        </CardFooter>
+      </form>
     </Card>
   );
 }

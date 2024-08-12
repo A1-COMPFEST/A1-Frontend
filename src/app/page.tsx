@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Gambar from "../../public/gambar.png";
-import Gambar2 from "../../public/section3.png";
 import Image from "next/image";
 import CourseCard from "@/components/course-card";
 
@@ -20,7 +18,7 @@ export default async function Home() {
 
   return (
     <main className="">
-      <section className="text-center h-screen flex flex-col justify-center items-center md:px-0 px-5">
+      <section id ="hero" className="text-center h-screen flex flex-col justify-center items-center md:px-0 px-5">
         <h2 className="text-3xl font-semibold">
           Empower Your Learning Journey with Seatudy
         </h2>
@@ -49,18 +47,18 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="bg-secondary py-12 shadow-md">
+      <section className="py-12">
         <div className="container mx-auto px-4 py-12">
           <div>
             <div className="flex flex-col md:flex-row items-start justify-start">
               <div className="w-full md:w-1/2 p-6">
-                <div className="bg-secondary rounded-lg p-4">
-                  <Image src={Gambar2} alt="" className="mx-auto md:mx-0"/>
+                <div className="rounded-lg p-4">
+                  <Image src={'/assets/landing-page/section-3.svg'} width={`600`} height={`600`} alt="" className="mx-auto md:mx-0"/>
                 </div>
               </div>
               <div className="w-full md:w-1/2 pt-8 mt-4 text-center md:text-left">
                 <h2 className="text-4xl font-bold mb-8">
-                  Share Your Passion, Teach the World
+                  Share Your Passion, knjnTeach the World
                 </h2>
                 <p className="text-xl md:w-3/4 pb-8 mx-auto md:mx-0">
                   Turn your expertise into engaging courses and inspire learners

@@ -11,12 +11,12 @@ export default async function InstructorPage() {
                 <Button className="bg-[#094C62] text-white hover:bg-[#083a4a] w-full sm:w-auto">Add Course</Button>
             </div>
             {courses.map((course) => (
-                <Link href={`/dashboard/instructor/course/${course.id}`} key={course.id} passHref>
+                <Link href={`/dashboard/instructor/course/${course.courses.id}`} key={course.courses.id} passHref>
                     <div className="bg-white rounded-lg p-4 mb-4 cursor-pointer hover:shadow-lg transition-shadow duration-300">
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <div className="w-full sm:w-1/6">
                                 <Image
-                                    src={course.image}
+                                    src={course.courses.image}
                                     alt="Course Image"
                                     width={150}
                                     height={100}
@@ -25,10 +25,10 @@ export default async function InstructorPage() {
                             </div>
                             <div className="w-full sm:w-3/6">
                                 <h3 className="text-[#094C62] text-md font-semibold mb-2">
-                                    {course.name}
+                                    {course.courses.name}
                                 </h3>
                                 <p className="text-gray-600 text-sm">
-                                    {course.syllabus}
+                                    {course.courses.syllabus}
                                 </p>
                             </div>
                             <div className="w-full sm:w-2/6 flex justify-center sm:justify-end space-x-4 mt-4 sm:mt-0">

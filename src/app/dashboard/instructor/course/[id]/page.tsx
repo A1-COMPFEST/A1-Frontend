@@ -12,7 +12,7 @@ export default function CoursePage() {
     const [activeTab, setActiveTab] = useState('assignments');
     const [openAssignment, setOpenAssignment] = useState<number | null>(null);
 
-    const course = courses.find(course => course.id === parseInt(id as string));
+    const course = courses.find(course => course.courses.id === parseInt(id as string));
 
     if (!course) {
         return <div>Course not found</div>;
@@ -42,10 +42,10 @@ export default function CoursePage() {
 
     return (
         <div className="container mx-auto p-4 max-w-3xl">
-            <h1 className={`text-3xl ${lato.className} font-bold mb-4 text-start text-[#094C62]`}>{course.name}</h1>
-            <p className="text-gray-400 text-lg mb-2 text-start">{course.level}</p>
-            <p className="text-black text-xl font-semibold mb-4 text-start">Rp {parseInt(course.price).toLocaleString()}</p>
-            <p className="text-justify mb-6">{course.description}</p>
+            <h1 className={`text-3xl ${lato.className} font-bold mb-4 text-start text-[#094C62]`}>{course.courses.name}</h1>
+            <p className="text-gray-400 text-lg mb-2 text-start">{course.courses.level}</p>
+            <p className="text-black text-xl font-semibold mb-4 text-start">Rp {course.courses.price}</p>
+            <p className="text-justify mb-6">{course.courses.description}</p>
 
             <div className="mb-6">
                 <div className="flex justify-start space-x-4 border-b">

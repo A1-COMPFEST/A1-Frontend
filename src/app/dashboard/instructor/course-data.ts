@@ -1,50 +1,41 @@
 export const courses = [
     {
-        id: 9,
-        name: "Go: The Complete Developer's Guide (Golang)",
-        slug: "Go:-The-Complete-Developer's-Guide-(Golang)",
-        instructor_id: "4",
-        category_id: "1",
-        description: "Go is an open source programming language created by Google.  As one of the fastest growing languages in terms of popularity, its a great time to pick up the basics of Go!\n" +
-            "\n" +
-            "This course is designed to get you up and running as fast as possible with Go.  We'll quickly cover the basics, then dive into some of the more advanced features of the language.  Don't be tricked by other courses that only teach you for-loops and if-statements!  This is the only course on Udemy that will teach you how to use the full power of Go's concurrency model and interface type systems.",
-        syllabus: "Learn Go (Golang) from the ground up &amp; in great depth by building multiple demo projects, incl. a REST API",
-        image: "/temp-img.png",
-        level: "Beginner",
-        price: "100000",
-        updated_at: "2024-08-11T01:37:56.000000Z",
-        created_at: "2024-08-11T01:37:56.000000Z",
-    },
-    {
-        id: 7,
-        name: "y",
-        slug: "Go:-The-Complete-Developer's-Guide-(Golang)",
-        instructor_id: "4",
-        category_id: "1",
-        description: "Go is an open source programming language created by Google.  As one of the fastest growing languages in terms of popularity, its a great time to pick up the basics of Go!\n" +
-            "\n" +
-            "This course is designed to get you up and running as fast as possible with Go.  We'll quickly cover the basics, then dive into some of the more advanced features of the language.  Don't be tricked by other courses that only teach you for-loops and if-statements!  This is the only course on Udemy that will teach you how to use the full power of Go's concurrency model and interface type systems.",
-        syllabus: "Learn Go (Golang) from the ground up &amp; in great depth by building multiple demo projects, incl. a REST API",
-        image: "/temp-img.png",
-        level: "Intermediate",
-        price: "100000",
-        updated_at: "2024-08-11T01:37:56.000000Z",
-        created_at: "2024-08-11T01:37:56.000000Z",
-    },
-    {
-        id: 8,
-        name: "x",
-        slug: "Go:-The-Complete-Developer's-Guide-(Golang)",
-        instructor_id: "4",
-        category_id: "1",
-        description: "Go is an open source programming language created by Google.  As one of the fastest growing languages in terms of popularity, its a great time to pick up the basics of Go!\n" +
-            "\n" +
-            "This course is designed to get you up and running as fast as possible with Go.  We'll quickly cover the basics, then dive into some of the more advanced features of the language.  Don't be tricked by other courses that only teach you for-loops and if-statements!  This is the only course on Udemy that will teach you how to use the full power of Go's concurrency model and interface type systems.",
-        syllabus: "Learn Go (Golang) from the ground up &amp; in great depth by building multiple demo projects, incl. a REST API",
-        image: "/temp-img.png",
-        level: "Advanced",
-        price: "100000",
-        updated_at: "2024-08-11T01:37:56.000000Z",
-        created_at: "2024-08-11T01:37:56.000000Z",
+        courses: {
+            id: 3,
+            name: "Jago Golang",
+            slug: "jago-golang",
+            instructor_id: 4,
+            instructor_name: "Microsoft Expert",
+            category_id: 1,
+            category_name: "Golang",
+            description: "Beli course ini kalo mau jago Golang",
+            syllabus: "Materi yang diajarkan dalam kursus",
+            image: "/assets/components/card/course-golang.png",
+            price: 100000,
+            level: "intermediate",
+            average_rating: "3.0",
+            created_at: "2024-08-09T10:11:19.000000Z",
+            updated_at: "2024-08-09T10:11:19.000000Z",
+            contents: [
+                {
+                    id: 5,
+                    course_id: 3,
+                    title: "Golang",
+                    description: "Langkah pertama menjadi golang dev",
+                    file: "D:\\laragon\\laragon\\www\\compfets\\be\\public//contents\\r9bzqWmrVjRYvWm7mcALKcefbxfLzpGH2E6pRMgd.pdf",
+                    created_at: "2024-08-09T10:13:51.000000Z",
+                    updated_at: "2024-08-09T10:13:51.000000Z"
+                },
+                {
+                    id: 6,
+                    course_id: 3,
+                    title: "Goling 2",
+                    description: "Langkah pertama menjadi golang dev",
+                    file: "D:\\laragon\\laragon\\www\\compfets\\be\\public//contents\\NgE0Rss0S553RVTlN8yKHsiYROQU3dsgiWTW2Ip3.pdf",
+                    created_at: "2024-08-09T10:13:59.000000Z",
+                    updated_at: "2024-08-09T10:13:59.000000Z"
+                }
+            ]
+        }
     },
 ];
