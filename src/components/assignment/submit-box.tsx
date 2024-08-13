@@ -3,6 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { FormEvent, useState, useRef } from "react";
 
+
+interface SubmitBoxProps {
+  userId: number;
+  token : any;
+}
+
+
 export default function SubmitBox() {
   const [file, setFile] = useState<File | null>(null);
   const hiddenFileInput = useRef<HTMLInputElement>(null);

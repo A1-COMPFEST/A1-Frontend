@@ -49,14 +49,6 @@ export default async function AssignmentPage({
         </div>
         <div className="items-start p-6 border-2 shadow-md min-w-60">
           <SubmitBox /> 
-          {/* <div className="flex flex-col justify-between gap-4 ">
-            <div className="flex flex-row justify-between">
-              <div className="text-primary font-semibold">Assignment</div>
-              <div className="text-muted-foreground text-md">Started</div>
-            </div>
-            <Button variant={"outline"}>Add a Task</Button>
-            <Button>Submit</Button>
-          </div> */}
         </div>
       </div>
     </div>

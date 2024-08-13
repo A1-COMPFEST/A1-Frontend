@@ -25,7 +25,7 @@ import {
 import { Category } from "@/app/types";
 
 interface AddCourseDialog {
-  userId: number;
+  userId: string;
   categories: Category[];
 }
 
@@ -38,7 +38,7 @@ export default function AddCourseDialog({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
-    formData.append("instructor_id", userId.toString());
+    formData.append("instructor_id", userId);
     formData.append("category_id", "1");
 
     try {
@@ -98,7 +98,7 @@ export default function AddCourseDialog({
                   </SelectTrigger>
                   <SelectContent position="popper">
                     {categories.map((category: Category) => (
-                      <SelectItem value={category.id.toString()}>
+                      <SelectItem value={category.id} key={category.id}>
                         {category.name}
                       </SelectItem>
                     ))}
