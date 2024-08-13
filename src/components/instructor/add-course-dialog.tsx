@@ -98,7 +98,7 @@ export default function AddCourseDialog({
                   </SelectTrigger>
                   <SelectContent position="popper">
                     {categories.map((category: Category) => (
-                      <SelectItem value={category.id} key={category.id}>
+                      <SelectItem value={category.id.toString()} key={category.id}>
                         {category.name}
                       </SelectItem>
                     ))}
