@@ -42,3 +42,8 @@ export interface Assignment {
   created_at : string;
   updated_at : string;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+}

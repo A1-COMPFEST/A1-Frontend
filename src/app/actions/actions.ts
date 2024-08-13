@@ -90,44 +90,24 @@ export async function addReview(
 }
 
 export async function addCourse(
-    userId: any,
-    courseName: string,
-    courseCategory: string,
-    level:string,
-    brief: string,
-    desc: string,
-    cover: File,
-    price: number,
+    formData: FormData
     ) {
-
-  const formData = new FormData();
-
-  formData.append('userId', userId.toString());
-  formData.append('courseName', courseName);
-  formData.append('courseCategory', courseCategory);
-  formData.append('level', level);
-  formData.append('brief', brief);
-  formData.append('description', desc);
-  formData.append('cover', cover);
-  formData.append('price', price.toString());
 
   try {
     const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses`,
-        {
-          formData
-        },
+          formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            // Authorization: `Bearer ${token}`,
+            
           },
         }
     );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
+    return response.data.message;
+  } catch (error : any) {
     console.error("Error during adding new course::", error);
+    console.log();
     throw error;
   }
 }
