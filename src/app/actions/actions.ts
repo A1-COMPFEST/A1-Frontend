@@ -1,6 +1,7 @@
 "use server";
 import axios from "axios";
 import { headers } from "next/headers";
+import {any} from "prop-types";
 
 
 export async function topUp(userId: any, token: string, amount: number) {
@@ -101,6 +102,30 @@ export async function addCourse(
           headers: {
             'Content-Type': 'multipart/form-data',
             
+          },
+        }
+    );
+    return response.data.message;
+  } catch (error : any) {
+    console.error("Error during adding new course::", error);
+    console.log();
+    throw error;
+  }
+}
+
+export async function updateCourse(
+    formData: FormData,
+    courseId: number
+) {
+
+  try {
+    const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/6`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+
           },
         }
     );
