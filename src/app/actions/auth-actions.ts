@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import axios from "axios";
 import exp from "constants";
+import { redirect } from "next/navigation";
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 
@@ -48,10 +49,10 @@ export async function signIn(email : string, password : string){
 }
 
 
-export async function signUpUser(name : string, email : string, password : string){
+export async function signUp(name : string, email : string, password : string, role : string){
   try{
     await sleep(1000);
-    const response = await axios.post(`${baseUrl}/register/user`, {
+    const response = await axios.post(`${baseUrl}/register/${role}`, {
       name,
       email,
       password
@@ -67,6 +68,7 @@ export async function signUpUser(name : string, email : string, password : strin
 export async function signOut() {
   cookies().delete("token");
   cookies().delete("user");
+  redirect("/");
 } 
 export async function getUserRole() {
   const userCookie = cookies().get("user");

@@ -4,7 +4,7 @@ import { BookText } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import SubmitBox from "../../../../../../components/assignment/submit-box";
+import SubmitBox from "@/components/assignment/submit-box";
 
 export default async function AssignmentPage({
   params,

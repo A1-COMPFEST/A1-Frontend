@@ -41,7 +41,7 @@ export default function SigninForm() {
     }
   };
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[500px]">
       <CardHeader>
         <CardTitle className="text-center pb-2">Sign In</CardTitle>
         <CardDescription className="text-center">
