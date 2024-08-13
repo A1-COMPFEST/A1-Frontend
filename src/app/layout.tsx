@@ -20,11 +20,13 @@ export default async function RootLayout({
   const isSignedIn = await isLoggedIn();
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar isSignedIn={isSignedIn} />
-        <Toaster />
+    <body className={inter.className}>
+    <Navbar isSignedIn={isSignedIn}/>
+    <Toaster/>
+      <main className="px-10 sm:px-6 md:px-8 lg:px-16 xl:px-24 max-w-7xl mx-auto">
         {children}
-      </body>
+      </main>
+    </body>
     </html>
   );
 }
