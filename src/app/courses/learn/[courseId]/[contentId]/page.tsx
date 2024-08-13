@@ -36,11 +36,16 @@ async function getReviews(courseId: string, token: string) {
 }
 
 async function getAssignments(courseId: string, token: string) {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}/assignments`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  return response.data.assignments;
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}/assignments`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data.assignments;
+  } catch (error) {
+    console.error("Error during purchase:", error);
+    return [];
+  }
 }
 
 export default async function CourseContent({
@@ -65,17 +70,19 @@ export default async function CourseContent({
   const reviews = await getReviews(params.courseId, userToken);
   // const pdfLink = content.file;
   // console.log(pdfLink);
-
   const assignments = await getAssignments(params.courseId, userToken);
 
   return (
-    <div className="flex justify-center px-6 py-12">
-      <div className="grid grid-cols-[1fr_300px] gap-6 w-4/5">
+    <div className="flex justify-center py-12">
+      <div className="grid grid-cols-[1fr_300px] gap-6 ">
         <div className="flex flex-col gap-6">
           <div className="text-primary text-xl font-semibold pb-4">
-            {content.id}. {content.title}
+            {content.title}
           </div>
-          <div className="aspect-[16/9] bg-muted rounded-lg">
+          <div
+            className="aspect-[16/9] bg-muted rounded-lg"
+            style={{ height: "60vh" }}
+          >
             <embed
               // src={pdfLink}
               src="/assets/pdfs/p.pdf"
@@ -141,7 +148,7 @@ export default async function CourseContent({
                 <div className="grid gap-2 mt-4">
                   {assignments.map((assignment: Assignment) => (
                     <Link
-                      href={`/courses/learn/${params.courseId}/${content.id}`}
+                      href={`/courses/learn/${params.courseId}/assignment/${assignment.id}`}
                       className="flex items-center justify-between hover:bg-muted/50 px-2 py-1 rounded-md"
                       prefetch={false}
                       key={assignment.id}
@@ -150,11 +157,10 @@ export default async function CourseContent({
                         <BookText className="border-2 border-primary w-8 h-8 min-w-2 text-primary" />
                         <div className="flex flex-col">
                           <h2 className="text-md font-semibold">
-                            Course Final Project Assignment
+                            {assignment.title}
                           </h2>
                           <h3 className="text-sm text-primary max-h-5 overflow-hidden">
-                            As you approach the end of this course, it's time to
-                            putactice
+                            {assignment.description}
                           </h3>
                         </div>
                       </div>
@@ -177,9 +183,7 @@ export default async function CourseContent({
                   className="flex items-center justify-between hover:bg-muted/50 px-2 py-1 rounded-md"
                   prefetch={false}
                 >
-                  <span>
-                    {content.id}. {content.title}
-                  </span>
+                  <span>{content.title}</span>
                   <ChevronRight className="w-4 h-4" />
                 </Link>
               ))}
