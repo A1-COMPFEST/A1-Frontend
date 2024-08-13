@@ -11,11 +11,43 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import { topUp } from "@/app/actions/actions";
+import { purchaseCourse, topUp } from "@/app/actions/actions";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function BuyCourseDialog() {
+interface BuyCourseDialogProps {
+  courseId: number;
+  title: string;
+  price: number;
+  userId?: number | null;
+  token?: string | null;
+}
+
+export default function BuyCourseDialog({
+  courseId,
+  title,
+  price,
+  userId,
+  token,
+}: BuyCourseDialogProps) {
+  const router = useRouter();
+  const handleSubmit = async () => {
+    if (!userId || !token) {
+      toast.error("Please login first");
+      router.push("/signin");
+      return;
+    }
+    try {
+      const response = await purchaseCourse(userId, token, courseId);
+      console.log(response);
+      toast.success("Purchase successful");
+      router.refresh();
+    } catch (error : any) {
+      toast.error(error.message);
+      console.log("Error during purchase:", error);
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -33,21 +65,29 @@ export default function BuyCourseDialog() {
             {" "}
             {/* Added margin-bottom */}
             <div>
-              <p className="text-gray-700">
-                Go: The Complete Developer's Guide (Golang)
-              </p>
+              <p className="text-gray-700">{title}</p>
             </div>
             <div>
-              <p className="text-gray-700">Rp199,000</p>
+              <p className="text-gray-700">
+                {price.toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
+              </p>
             </div>
           </div>
 
           <div className="flex justify-between">
             <p className=" font-bold">Total:</p>
-            <p className="font-bold">Rp199,000</p>
+            <p className="font-bold">
+              {price.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              })}
+            </p>
           </div>
           <div className="flex justify-center mt-8">
-            <Button>Complete Checkout</Button>
+            <Button onClick={handleSubmit}>Complete Checkout</Button>
           </div>
         </div>
       </DialogContent>
