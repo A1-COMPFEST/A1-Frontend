@@ -56,7 +56,7 @@ export async function signUpUser(name : string, email : string, password : strin
       email,
       password
     });
-    console.log(response);
+    
     return { success: true };
   } catch (error : any) {
     console.error('Signup error:', error);
@@ -76,7 +76,7 @@ export async function getUserRole() {
   }
 
   const user = JSON.parse(userCookie.value);
-  console.log(user.role);
+  
   return user.role;
 
 }
@@ -89,7 +89,7 @@ export async function getUserId() {
   }
 
   const user = JSON.parse(userCookie.value);
-  console.log(user.id);
+  
   return user.id;
 }
 
@@ -99,7 +99,7 @@ export async function getUserToken() {
     return null;
   }
   
-  console.log(tokenCookie.value);
+  
   return tokenCookie.value;
 }
 

@@ -1,18 +1,24 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import BuyCourseDialog from "@/components/course-detail/purchase-dialog";
+import { getUserId, getUserToken } from "@/app/actions/auth-actions";
 
 async function getCourseData(id: number) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${id}`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${id}`,
+    {
+      cache: "no-cache",
+    }
   );
   const data = await response.json();
+  
   return data.courses;
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
   const course = await getCourseData(params.id);
-
+  const userId = await getUserId();
+  const userToken = await getUserToken();
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-5xl mx-auto shadow-md rounded-sm overflow-hidden">
@@ -43,7 +49,13 @@ export default async function Page({ params }: { params: { id: number } }) {
             <h2 className="text-xl font-semibold mb-4">Description</h2>
             <p className="text-gray-700 mb-8">{course.description}</p>
 
-            <BuyCourseDialog />
+            <BuyCourseDialog
+              title={course.name}
+              courseId={params.id}
+              price={course.price}
+              userId={userId}
+              token={userToken}
+            />
           </div>
         </div>
       </div>

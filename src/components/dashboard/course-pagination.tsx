@@ -1,19 +1,6 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { PurchasedCourse } from "@/app/types";
 import CourseCard from "../course-card";
 import PaginationClient from "../pagination-client";
-
-
 
 interface PaginatedCourseListProps {
   courses: PurchasedCourse[];
@@ -25,8 +12,6 @@ export default function PaginatedCourseList({
   last_page,
   current_page,
 }: PaginatedCourseListProps) {
-  
-
   return (
     <div className="max-w-screen-lg mx-auto text-center md:px-0 px-5">
       <h2 className="text-xl font-semibold mb-4">Purchased Courses</h2>
@@ -44,7 +29,6 @@ export default function PaginatedCourseList({
         ))}
       </div>
       <PaginationClient last_page={last_page} current_page={current_page} />
-      
     </div>
   );
 }

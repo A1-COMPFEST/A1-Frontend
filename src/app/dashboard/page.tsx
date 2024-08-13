@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import SigninForm from "@/components/auth/signin-form";
 import PaginatedCourseList from "@/components/dashboard/course-pagination";
 import TopupDialog from "@/components/dashboard/topup-dialog";
@@ -13,6 +14,7 @@ import { redirect } from "next/navigation";
 import axios from "axios";
 import { headers } from "next/headers";
 import { topUp } from "../actions/actions";
+import { revalidatePath } from "next/cache";
 
 interface DashboardProps {
   searchParams?: {
@@ -40,7 +42,7 @@ async function getCourse(
       Authorization: `Bearer ${token}`,
     },
   });
-
+  // console.log(response.data);
   return response.data;
 }
 
@@ -54,7 +56,7 @@ async function getBalance(userId: number, token: any) {
       Authorization: `Bearer ${token}`,
     },
   });
-
+  // console.log(response.data);
   return response.data;
 }
 
@@ -70,8 +72,9 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   const balanceData = await getBalance(userId, token);
   const course = courseData;
   const balance = balanceData;
-  // const [course, balance] = await Promise.all([courseData, balanceData]);
-  // const response = await topUp();
+  console.log(courseData.courses.length);
+
+
   return (
     <div className="w-full mt-4 px-4">
       <div className="max-w-4xl mx-auto pb-8">
@@ -85,7 +88,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
               })}
             </div>
           </div>
-          <TopupDialog token={token} userId={userId}/>
+          <TopupDialog token={token} userId={userId} />
         </div>
       </div>
       <PaginatedCourseList
