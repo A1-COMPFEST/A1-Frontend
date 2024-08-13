@@ -44,3 +44,8 @@ export interface Assignment {
   title : string;
   description : string; 
 }
+
+export interface Category {
+  id: string;
+  name: string;
+}

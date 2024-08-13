@@ -7,6 +7,7 @@ import { addAnswer } from "@/app/actions/actions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+
 interface SubmitBoxProps {
   userId: string;
   answerStatus: string;
@@ -14,6 +15,14 @@ interface SubmitBoxProps {
   token: string;
   grade: string;
 }
+
+
+interface SubmitBoxProps {
+  userId: number;
+  token : any;
+}
+
+
 
 export default function SubmitBox({
   userId,

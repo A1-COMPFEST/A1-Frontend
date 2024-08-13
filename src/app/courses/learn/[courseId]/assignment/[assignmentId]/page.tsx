@@ -4,7 +4,7 @@ import { BookText } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import SubmitBox from "../../../../../../components/assignment/submit-box";
+import SubmitBox from "@/components/assignment/submit-box";
 import axios from "axios";
 
 
@@ -22,6 +22,7 @@ async function getAnwerStatusAndGrade(userId: string, userToken: string, params:
     return [];
   }
 }
+
 
 
 
@@ -96,6 +97,7 @@ export default async function AssignmentPage({
         </div>
         <div className="items-start p-6 border-2 shadow-md min-w-60">
           <SubmitBox userId={userId} assignmentId={params.assignmentId} token={userToken} answerStatus={answerStatus} grade={grade}/>
+
         </div>
       </div>
     </div>
