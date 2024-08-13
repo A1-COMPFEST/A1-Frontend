@@ -19,7 +19,7 @@ export default function CourseCard({
   average_rating,
 }: CourseCardProps) {
   return (
-    <Link href={`/courses/${id}`}>
+    <Link href={`/courses/learn/${id}/1`}>
       <div
         key={id}
         className="bg-white shadow-md p-2 transform transition duration-500 hover:bg-secondary hover:shadow-xl w-full max-w-xs"

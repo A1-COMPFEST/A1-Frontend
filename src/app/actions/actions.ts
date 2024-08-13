@@ -132,3 +132,22 @@ export async function addCourse(
   }
 }
 
+export async function addAnswer (formData : FormData, token: string, assignmentId: string) {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${assignmentId}/answers`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error during addAnswer:", error);
+    throw error;
+  }
+}

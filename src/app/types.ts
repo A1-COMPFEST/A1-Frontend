@@ -41,4 +41,6 @@ export interface Assignment {
   due_date : string;
   created_at : string;
   updated_at : string;
+  title : string;
+  description : string; 
 }
