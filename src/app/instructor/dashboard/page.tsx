@@ -5,6 +5,7 @@ import AddCourseDialog from "@/components/instructor/add-course-dialog";
 import { getUserId } from "@/app/actions/auth-actions";
 import axios from "axios";
 import EditCourseDialog from "@/components/instructor/edit-course-dialog";
+import DeleteCourseDialog from "@/components/instructor/delete-course-dialog";
 
 async function getInstructorCourse() {
   const response = await fetch(
@@ -57,10 +58,8 @@ export default async function InstructorPage() {
                   </div>
                 </Link>
                 <div className="w-full sm:w-1/5 flex justify-center sm:justify-end space-x-4 mt-4 sm:mt-0">
-                  <EditCourseDialog userId={instructorId} courseId={course.id} categories={uniqueCategoryData}/>
-                  <Button className="bg-[#FFEDE7] text-[#DF4B4B] hover:bg-[#FFE0D7]">
-                    Delete
-                  </Button>
+                  <EditCourseDialog userId={instructorId} courseId={course.id} courseName={course.name} categories={uniqueCategoryData}/>
+                    <DeleteCourseDialog userId={instructorId} courseName={course.name} courseId={course.id}/>
                 </div>
               </div>
             </div>

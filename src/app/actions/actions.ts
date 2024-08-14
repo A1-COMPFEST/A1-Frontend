@@ -120,7 +120,7 @@ export async function updateCourse(
 
   try {
     const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/6`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}`,
         formData,
         {
           headers: {
@@ -132,6 +132,28 @@ export async function updateCourse(
     return response.data.message;
   } catch (error : any) {
     console.error("Error during adding new course::", error);
+    console.log();
+    throw error;
+  }
+}
+
+export async function deleteCourse (
+    courseId: number
+) {
+
+  try {
+    const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+        )
+    return response.data;
+  } catch (error : any) {
+    console.error("Error during deleting course::", error)
     console.log();
     throw error;
   }
