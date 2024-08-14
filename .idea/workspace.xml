@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1b0b6d7-9779-4cab-b629-ef5e802c7003" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/instructor/tabs/assignments-tab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/instructor/tabs/materials-tab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/instructor/tabs/students-tab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/instructor/tabs/submissions-tab.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/instructor/dashboard/course/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/instructor/dashboard/course/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +29,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -79,6 +86,9 @@
       <workItem from="1723343929927" duration="3574000" />
       <workItem from="1723456996738" duration="881000" />
       <workItem from="1723572445080" duration="308000" />
+      <workItem from="1723605512476" duration="4855000" />
+      <workItem from="1723611084263" duration="52000" />
+      <workItem from="1723611338768" duration="12338000" />
     </task>
     <servers />
   </component>
@@ -92,11 +102,6 @@
           <url>file://$PROJECT_DIR$/src/app/actions/actions.ts</url>
           <line>6</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/app/actions/actions.ts</url>
-          <line>101</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

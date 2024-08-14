@@ -50,6 +50,25 @@ export interface Category {
   name: string;
 }
 
-export interface InstructorCourse {
+export interface Material {
+  id: number;
+  title: string;
+  description: string;
+  file: string;
+}
 
+export interface Student {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface Submission {
+  id: number;
+  assignmentId: number;
+  assignmentName: string;
+  studentId: number;
+  studentName: string;
+  submissionDate: string;
+  status: string;
 }
