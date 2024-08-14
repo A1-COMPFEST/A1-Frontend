@@ -9,7 +9,7 @@ import DeleteCourseDialog from "@/components/instructor/delete-course-dialog";
 
 async function getInstructorCourse() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/instructor/6`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/instructor/5`,
     {
       cache: "no-cache",
     }

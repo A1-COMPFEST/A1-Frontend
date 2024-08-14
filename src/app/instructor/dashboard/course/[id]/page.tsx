@@ -11,7 +11,7 @@ type CourseDetailPageProps = {
     searchParams: { tab?: string };
 }
 
-async function fetchCourseData(id: string) {
+async function getCourseData(id: string) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${id}`, {
         cache: 'no-store',
     });
@@ -19,44 +19,58 @@ async function fetchCourseData(id: string) {
     if (!response.ok) {
         notFound();
     }
-
     return response.json();
 }
 
-async function fetchTabData(courseId: string, tab: string) {
-    const endpoint = {
-        assignments: `/courses/${courseId}/assignments`,
-        materials: `/courses/${courseId}/contents`,
-        'list-of-students': `/enrollment/${courseId}`,
-        submissions: `/courses/${courseId}/submissions`,
-    }[tab] || '/courses/${courseId}/assignments';
-
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
-        cache: 'no-store',
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch ${tab} data`);
-    }
-
-    return response.json();
+async function getAssignments(id: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${id}/assignments`,
+        {
+            cache: 'no-cache',
+        }
+    );
+    return await response.json();
 }
+
+async function getMaterials(id: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${id}/contents`
+    );
+    return await response.json();
+}
+
+async function getStudents(id: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/enrollment/${id}`
+    );
+    return await response.json();
+}
+
 
 export default async function CourseDetailPage({ params, searchParams }: CourseDetailPageProps) {
     const { id } = params;
-    const activeTab = searchParams.tab || 'assignments';
 
-    const courseData = await fetchCourseData(id);
+    // DETAIL COURSE
+    const courseData = await getCourseData(id);
     const course = courseData.courses;
 
-    const tabData = await fetchTabData(id, activeTab);
+    // GET ASSIGNMENT
+    const courseAssignment = await getAssignments(id);
+    const assignments = courseAssignment.assignments;
+    console.log(assignments);
 
-    const tabs = [
-        { id: 'assignments', label: 'Assignments' },
-        { id: 'materials', label: 'Materials' },
-        { id: 'list-of-students', label: 'List of Students' },
-        { id: 'submissions', label: 'Submissions' }
-    ];
+
+    // MATERIAL
+    const courseMaterials = await getMaterials(id);
+    const materials = courseMaterials.contents;
+
+    // STUDENTS
+    const courseStudents = await getStudents(id);
+    // console.log(courseStudents);
+    const students = courseStudents.users;
+
+
+
 
     return (
         <div className="container mx-auto p-4 max-w-3xl">
@@ -65,24 +79,30 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
             <p className="text-black text-xl font-semibold mb-4 text-start">Rp {course.price}</p>
             <p className="text-justify mb-6">{course.description}</p>
 
-            <div className="mb-6">
-                <div className="flex justify-start space-x-4 border-b">
-                    {tabs.map((tab) => (
-                        <Link
-                            key={tab.id}
-                            href={`/courses/${id}?tab=${tab.id}`}
-                            className={`pb-2 ${activeTab === tab.id ? 'border-b-2 border-[#094C62] text-[#094C62]' : ''}`}
-                        >
-                            {tab.label}
-                        </Link>
-                    ))}
+            <h1 className={`font-bold`}>Daftar kursus</h1>
+            {materials?.map((material: any) => (
+                <div key={material.id}>
+                    <p>{material.title}</p>
+                    <p>{material.description}</p>
                 </div>
-            </div>
+            ))}
 
-            {activeTab === 'assignments' && <AssignmentsTab assignments={tabData} />}
-            {activeTab === 'materials' && <MaterialsTab materials={tabData} />}
-            {activeTab === 'list-of-students' && <StudentsTab students={tabData} />}
-            {activeTab === 'submissions' && <SubmissionsTab submissions={tabData} />}
+            <h1 className={`font-bold mt-2`}>Daftar assignments</h1>
+            {assignments?.map((assignment: any) => (
+                <div key={assignment}>
+                    <p>{assignment.title}</p>
+                    {assignment.id}
+                    <p>{assignment.description}</p>
+                </div>
+            ))}
+
+            <h1 className={`font-bold mt-2`}>Daftar Siswa</h1>
+            {students?.map((student: any) => (
+                <div key={student}>
+                    <p>{student.name}</p>
+                </div>
+            ))}
+
         </div>
     );
 }
