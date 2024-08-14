@@ -28,12 +28,14 @@ interface EditCourseDialog {
     userId: string;
     categories: Category[];
     courseId: number;
+    courseName: string;
 }
 
 export default function EditCourseDialog({
     userId,
     categories,
     courseId,
+    courseName,
     }: EditCourseDialog) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -59,12 +61,12 @@ export default function EditCourseDialog({
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button>Edit</Button>
+                <Button>Edit </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle className="text-primary font-semibold text-xl text-center">
-                        Edit
+                        Edit {courseName}
                     </DialogTitle>
                 </DialogHeader>
                 <form
