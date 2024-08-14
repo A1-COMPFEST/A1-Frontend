@@ -119,7 +119,7 @@ export async function updateCourse(
 ) {
 
   try {
-    const response = await axios.put(
+    const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}`,
         formData,
         {
