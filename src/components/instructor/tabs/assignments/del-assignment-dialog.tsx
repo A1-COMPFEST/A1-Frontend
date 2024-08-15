@@ -7,37 +7,42 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import {deleteCourse} from "@/app/actions/instructor/course-action";
+import {addAssignment, deleteAssignment, editAssignment} from "@/app/actions/instructor/assignment-action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
-interface DeleteCourseDialog {
-    userId: string;
-    courseId: number;
-    courseName: string;
+
+interface EditAssignmentDialogProps {
+    assignmentId: string;
+    courseId: string
+    assignmentTitle: string;
 }
 
-export default function DeleteCourseDialog({
-    userId,
+export default function DelAssignmentDialog({
+    assignmentId,
     courseId,
-    courseName,
-    }: DeleteCourseDialog) {
+    assignmentTitle,
+    }: EditAssignmentDialogProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleSubmit = async () => {
-
+    const handleDelete = async () => {
+        setLoading(true);
         try {
-            const response = await deleteCourse(courseId);
-            console.log(response);
-            toast.success("Course edited successfully!");
+            await deleteAssignment(courseId, assignmentId);
+            toast.success("Assignment updated successfully!");
+            setIsOpen(false);
             router.refresh();
         } catch (error) {
+            toast.error("An error occurred while updating the assignment");
+            console.error("Error updating assignment:", error);
+        } finally {
             setLoading(false);
-            toast.error("An error occurred");
-            console.error("Error during editing the course:", error);
         }
     };
 
@@ -49,24 +54,24 @@ export default function DeleteCourseDialog({
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle className="text-primary font-semibold text-xl text-center">
-                        Delete Course
+                        Delete Assignment
                     </DialogTitle>
                 </DialogHeader>
                 <form
                     action={async () => {
-                        await handleSubmit();
+                        await handleDelete();
                         setIsOpen(false);
                     }}
                 >
                     <div className={`text-center`}>
                         Are you sure wanna delete {``}
                         <span className={`text-[#094C62]`}>
-                            {courseName}
+                            {assignmentTitle}
                         </span>?
                     </div>
                     <div className="grid gap-4 py-8">
                         <Button type="submit" disabled={loading}>
-                            Commit
+                            Delete
                         </Button>
                     </div>
                 </form>

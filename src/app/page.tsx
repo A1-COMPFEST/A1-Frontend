@@ -37,16 +37,16 @@ export default async function Home() {
           your career.
         </h4>
         <div className="md:flex justify-center gap-5 mt-5">
-          {popularCourses?.map((course: any) => (
-            <CourseCard
-              key={course.id}
-              id={course.id}
-              name={course.name}
-              instructor_name={course.instructor_name}
-              price={course.price}
-              image={course.image}
-              average_rating={course.average_rating}
-            />
+          {popularCourses?.slice(0, 4).map((course: any) => (
+              <CourseCard
+                  key={course.id}
+                  id={course.id}
+                  name={course.name}
+                  instructor_name={course.instructor_name}
+                  price={course.price}
+                  image={course.image}
+                  average_rating={course.average_rating}
+              />
           ))}
         </div>
       </section>
@@ -61,7 +61,7 @@ export default async function Home() {
               </div>
               <div className="w-full md:w-1/2 pt-8 mt-4 text-center md:text-left">
                 <h2 className="text-4xl font-bold mb-8">
-                  Share Your Passion, knjnTeach the World
+                  Share Your Passion, Teach the World
                 </h2>
                 <p className="text-xl md:w-3/4 pb-8 mx-auto md:mx-0">
                   Turn your expertise into engaging courses and inspire learners

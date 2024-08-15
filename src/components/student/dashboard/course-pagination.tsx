@@ -1,6 +1,6 @@
 import { PurchasedCourse } from "@/app/types";
-import CourseCard from "../course-card";
-import PaginationClient from "../pagination-client";
+import CourseCard from "../../course-card";
+import PaginationClient from "../../pagination-client";
 
 interface PaginatedCourseListProps {
   courses: PurchasedCourse[];

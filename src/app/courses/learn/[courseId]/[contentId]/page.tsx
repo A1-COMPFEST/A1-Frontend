@@ -2,13 +2,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Link from "next/link";
 import { BookText, ChevronRight } from "lucide-react";
 import { Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import axios from "axios";
-import ReviewForm from "@/components/course-content/review-form";
-import { getUserId, getUserToken } from "@/app/actions/auth-actions";
+import ReviewForm from "@/components/student/course-content/review-form";
+import { getUserId, getUserToken } from "@/app/actions/auth/auth-actions";
 import { Assignment, Content, Rating } from "@/app/types";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 async function getContents(courseId: string, token: string) {

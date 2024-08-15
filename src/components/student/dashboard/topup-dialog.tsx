@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -11,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import { topUp } from "@/app/actions/actions";
+import { topUp } from "@/app/actions/student/student-actions";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 interface TopupDialogProps {

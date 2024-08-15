@@ -2,11 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
 import React from "react";
 
 import { Button } from "./ui/button";
-import { getUserToken, signOut } from "@/app/actions/auth-actions";
+import { getUserToken, signOut } from "@/app/actions/auth/auth-actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -42,7 +41,7 @@ export default function Navbar({ isSignedIn }: { isSignedIn: boolean }) {
       </Link>
       <div className="ml-auto flex space-x-4">
         {!isSignedIn ? (
-          <Link href="/signin">
+          <Link href="/auth/sign-in">
             <Button className="" variant={"outline"}>
               Sign In
             </Button>

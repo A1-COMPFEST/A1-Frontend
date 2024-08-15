@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -11,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import {addCourse, updateCourse} from "@/app/actions/actions";
+import { updateCourse} from "@/app/actions/instructor/course-action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Textarea } from "../ui/textarea";
@@ -61,7 +60,7 @@ export default function EditCourseDialog({
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button>Edit </Button>
+                <Button variant="outline">Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

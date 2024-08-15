@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import SigninForm from "@/components/auth/signin-form";
-import PaginatedCourseList from "@/components/dashboard/course-pagination";
-import TopupDialog from "@/components/dashboard/topup-dialog";
+import PaginatedCourseList from "@/components/student/dashboard/course-pagination";
+import TopupDialog from "@/components/student/dashboard/topup-dialog";
 import { Button } from "@/components/ui/button";
 import {
   getUserId,
@@ -9,11 +9,11 @@ import {
   getUserToken,
   isLoggedIn,
   signOut,
-} from "../actions/auth-actions";
+} from "../../actions/auth/auth-actions";
 import { redirect } from "next/navigation";
 import axios from "axios";
 import { headers } from "next/headers";
-import { topUp } from "../actions/actions";
+import { topUp } from "../../actions/student/student-actions";
 import { revalidatePath } from "next/cache";
 
 interface DashboardProps {

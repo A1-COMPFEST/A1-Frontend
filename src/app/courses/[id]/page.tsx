@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import BuyCourseDialog from "@/components/course-detail/purchase-dialog";
-import { getUserId, getUserToken } from "@/app/actions/auth-actions";
+import BuyCourseDialog from "@/components/student/course-detail/purchase-dialog";
+import { getUserId, getUserToken } from "@/app/actions/auth/auth-actions";
 
 async function getCourseData(id: number) {
   const response = await fetch(
