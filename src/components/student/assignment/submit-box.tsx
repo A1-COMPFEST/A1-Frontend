@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { FormEvent, useState, useRef } from "react";
-import { Input } from "../ui/input";
-import { addAnswer } from "@/app/actions/actions";
+import { Input } from "../../ui/input";
+import { addAnswer } from "@/app/actions/student/student-actions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 

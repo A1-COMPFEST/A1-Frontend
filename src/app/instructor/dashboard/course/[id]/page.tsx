@@ -1,8 +1,13 @@
 import { notFound } from 'next/navigation';
-import Link from "next/link";
 import Image from "next/image";
 import { lato } from "@/components/ui/font";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AddAssignmentDialog from "@/components/instructor/tabs/assignments/add-assignment-dialog";
+import EditAssignmentDialog from "@/components/instructor/tabs/assignments/edit-assignment-dialog";
+import DelAssignmentDialog from "@/components/instructor/tabs/assignments/del-assignment-dialog";
+import AddMaterialDialog from "@/components/instructor/tabs/materials/add-materials-dialog";
+import EditMaterialDialog from "@/components/instructor/tabs/materials/edit-materials-dialog";
+import DeleteMaterialDialog from "@/components/instructor/tabs/materials/del-materials-dialog";
 
 type CourseDetailPageProps = {
     params: { id: string };
@@ -110,7 +115,7 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
 
                 <TabsContent value="assignments">
                     <div className="mb-4">
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded">Add Assignment</button>
+                        <AddAssignmentDialog courseId={id} />
                     </div>
                     <div>
                         {assignments?.map((assignment: any) => (
@@ -122,9 +127,15 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                                     <h3 className="font-bold">{assignment.title}</h3>
                                     <p className="mb-2 sm:mb-0 whitespace-pre-wrap">{assignment.description}</p>
                                 </div>
-                                <div className="flex flex-col sm:flex-row w-full sm:w-auto">
-                                    <button className="bg-green-500 text-white px-2 py-1 rounded mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto">Edit</button>
-                                    <button className="bg-red-500 text-white px-2 py-1 rounded w-full sm:w-auto">Delete</button>
+                                <div className="flex flex-col sm:flex-row w-full gap-2 sm:w-auto">
+                                    <EditAssignmentDialog
+                                        courseId={id}
+                                        assignmentId={assignment.id}
+                                        assignmentTitle={assignment.title}
+                                        assignmentDescription={assignment.description}
+                                        assignmentDueDate={assignment.due_date}
+                                    />
+                                    <DelAssignmentDialog courseId={id} assignmentId={assignment.id} assignmentTitle={assignment.title}/>
                                 </div>
                             </div>
                         ))}
@@ -133,7 +144,7 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
 
                 <TabsContent value="materials">
                     <div className="mb-4">
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded">Add Material</button>
+                        <AddMaterialDialog courseId={id} />
                     </div>
                     <div>
                         {materials?.map((material: any) => (
@@ -143,13 +154,19 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                                     <h3 className="font-bold">{material.title}</h3>
                                     <p className="mb-2 sm:mb-0 whitespace-pre-wrap">{material.description}</p>
                                 </div>
-                                <div className="flex flex-col sm:flex-row w-full sm:w-auto">
-                                    <button
-                                        className="bg-green-500 text-white px-2 py-1 rounded mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto">Edit
-                                    </button>
-                                    <button
-                                        className="bg-red-500 text-white px-2 py-1 rounded w-full sm:w-auto">Delete
-                                    </button>
+                                <div className="flex flex-col sm:flex-row w-full gap-2 sm:w-auto">
+                                    <EditMaterialDialog
+                                        courseId={id}
+                                        materialId={material.id}
+                                        initialData={{
+                                            title: material.title,
+                                            description: material.description,
+                                        }}
+                                    />
+                                    <DeleteMaterialDialog
+                                        courseId={id}
+                                        materialId={material.id}
+                                    />
                                 </div>
                             </div>
                         ))}

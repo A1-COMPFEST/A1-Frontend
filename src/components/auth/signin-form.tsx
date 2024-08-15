@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { FormEvent } from "react";
-import { signIn } from "@/app/actions/auth-actions";
+import { signIn } from "@/app/actions/auth/auth-actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -46,7 +46,7 @@ export default function SigninForm() {
         <CardTitle className="text-center pb-2">Sign In</CardTitle>
         <CardDescription className="text-center">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-primary font-semibold">
+          <Link href="/auth/sign-up" className="text-primary font-semibold">
             sign up
           </Link>
         </CardDescription>

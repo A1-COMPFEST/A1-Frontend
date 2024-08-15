@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import AddCourseDialog from "@/components/instructor/add-course-dialog";
-import { getUserId } from "@/app/actions/auth-actions";
+import { getUserId } from "@/app/actions/auth/auth-actions";
 import axios from "axios";
 import EditCourseDialog from "@/components/instructor/edit-course-dialog";
 import DeleteCourseDialog from "@/components/instructor/delete-course-dialog";
@@ -11,7 +10,7 @@ async function getInstructorCourse() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/instructor/5`,
     {
-      cache: "no-cache",
+        cache: "no-cache",
     }
   );
   const data = await response.json();
@@ -28,10 +27,10 @@ export default async function InstructorPage() {
   const uniqueCategoryData = uniqueCategory.data.categories;
 
   return (
-      <div className="my-6">
+    <div className="my-6">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold mb-4 sm:mb-0">Manage your Courses</h1>
-          <AddCourseDialog userId={instructorId} categories={uniqueCategoryData}/>
+            <h1 className="text-2xl font-bold mb-4 sm:mb-0">Manage your Courses</h1>
+            <AddCourseDialog userId={instructorId} categories={uniqueCategoryData}/>
         </div>
         {instructorCourses?.map((course: any) => (
             <div className="rounded-lg p-4 mb-4 cursor-pointer hover:shadow-lg transition-shadow duration-300" key={course.id}>

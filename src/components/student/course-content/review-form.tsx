@@ -2,27 +2,26 @@
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Textarea } from "../ui/textarea";
+} from "../../ui/select";
+import { Textarea } from "../../ui/textarea";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { addReview } from "@/app/actions/actions";
+import { addReview } from "@/app/actions/student/student-actions";
 
 interface ReviewFormProps {
   courseId: string;

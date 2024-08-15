@@ -1,10 +1,10 @@
-import { getUserId, getUserToken } from "@/app/actions/auth-actions";
+import { getUserId, getUserToken } from "@/app/actions/auth/auth-actions";
 import { BookText } from "lucide-react";
 
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import SubmitBox from "@/components/assignment/submit-box";
+import SubmitBox from "@/components/student/assignment/submit-box";
 import axios from "axios";
 
 
