@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic";
 import SearchBar from "@/components/explore/search-bar";
 import ExploreContent from "@/components/explore/explore-content";
 import FilterAccordion from "@/components/explore/filter-accordion";
 import ResultFor from "@/components/explore/results-for";
 import axios from "axios";
+import { headers } from "next/headers";
 
 export interface ExploreProps {
   searchParams?: {
@@ -16,7 +18,8 @@ export interface ExploreProps {
 
 export default async function Explore({ searchParams }: ExploreProps) {
   const uniqueCategory = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/category`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/category`,
+    
   );
 
   const data = uniqueCategory.data;

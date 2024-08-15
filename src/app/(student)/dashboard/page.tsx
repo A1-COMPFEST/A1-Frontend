@@ -63,10 +63,16 @@ async function getBalance(userId: number, token: any) {
 export default async function Dashboard({ searchParams }: DashboardProps) {
   const isSigned = await isLoggedIn();
   if (!isSigned) {
-    redirect("/signin");
+    redirect("/auth/sign-in");
   }
   const userId = await getUserId();
   const token = await getUserToken();
+  const userRole = await getUserRole();
+
+  if (userRole === "instructor") {
+    redirect("/instructor/dashboard");
+  }
+
 
   const courseData = await getCourse(userId, token, searchParams);
   const balanceData = await getBalance(userId, token);

@@ -1,6 +1,7 @@
 import { ExploreProps } from "@/app/explore/page";
 import LongCourseCard from "./long-course-card";
 import PaginationClient from "../pagination-client";
+import axios from "axios";
 
 export default async function ExploreContent({
   courseSearchParams,
@@ -27,8 +28,8 @@ export default async function ExploreContent({
     }
   }
 
-  const response = await fetch(url.toString());
-  const data = await response.json();
+  const response = await axios.get(url.toString());
+  const data =  response.data;
   console.log(data);
 
   return (

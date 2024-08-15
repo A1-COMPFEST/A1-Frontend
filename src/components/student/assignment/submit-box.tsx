@@ -17,10 +17,7 @@ interface SubmitBoxProps {
 }
 
 
-interface SubmitBoxProps {
-  userId: number;
-  token : any;
-}
+
 
 
 

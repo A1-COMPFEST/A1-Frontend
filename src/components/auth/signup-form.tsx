@@ -38,7 +38,7 @@ export default function SignupForm() {
 
     if (result.success) {
       toast.success("Successfully signed up as " + role);
-      router.push("/signin");
+      router.push("/auth/sign-in");
     } else {
       toast.error(result.error || "An error occurred");
       console.log(result.error);

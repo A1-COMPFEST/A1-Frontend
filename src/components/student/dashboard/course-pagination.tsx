@@ -25,6 +25,7 @@ export default function PaginatedCourseList({
             price={course.price}
             image={course.image}
             average_rating={Number(course.average_rating)}
+            isDashboard={true}
           />
         ))}
       </div>

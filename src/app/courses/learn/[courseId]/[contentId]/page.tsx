@@ -57,7 +57,7 @@ export default async function CourseContent({
   const userId = await getUserId();
   const userToken = await getUserToken();
   if (!userToken) {
-    redirect("/signin");
+    redirect("/auth/sign-in");
   }
   const contents = await getContents(params.courseId, userToken);
   const content = await getContent(

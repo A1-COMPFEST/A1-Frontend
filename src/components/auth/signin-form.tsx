@@ -34,7 +34,7 @@ export default function SigninForm() {
 
     if (result.success) {
       toast.success("Signed in successfully!");
-      router.push("/");
+      window.history.pushState({}, "", "/");
     } else {
       toast.error(result.error || "An error occurred");
       console.log(result.error);

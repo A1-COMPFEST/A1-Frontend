@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import AddCourseDialog from "@/components/instructor/add-course-dialog";
-import { getUserId } from "@/app/actions/auth/auth-actions";
+import { getUserId, getUserRole } from "@/app/actions/auth/auth-actions";
 import axios from "axios";
 import EditCourseDialog from "@/components/instructor/edit-course-dialog";
 import DeleteCourseDialog from "@/components/instructor/delete-course-dialog";
+import { redirect } from "next/navigation";
 
 async function getInstructorCourse() {
   const response = await fetch(
@@ -18,6 +19,13 @@ async function getInstructorCourse() {
 }
 
 export default async function InstructorPage() {
+
+
+  const userRole = await getUserRole();
+  if (userRole !== "instructor") {
+    redirect("/dashboard");
+  }
+
   const instructorCourses = await getInstructorCourse();
   const instructorId = await getUserId();
 

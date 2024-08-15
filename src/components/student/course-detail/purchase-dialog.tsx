@@ -30,7 +30,7 @@ export default function BuyCourseDialog({
   const handleSubmit = async () => {
     if (!userId || !token) {
       toast.error("Please login first");
-      router.push("/signin");
+      router.push("/auth/sign-in");
       return;
     }
     try {
