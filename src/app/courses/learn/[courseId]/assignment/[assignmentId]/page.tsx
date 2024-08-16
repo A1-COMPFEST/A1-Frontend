@@ -88,7 +88,7 @@ export default async function AssignmentPage({
           {/* Embed PDF */}
           <div className="mt-6">
             <iframe
-              src="/assets/pdfs/p.pdf"
+              src={assignmentData.task}
               width="100%"
               height="500px"
               className="border-2 border-gray-300 rounded"

@@ -7,7 +7,7 @@ export interface PurchasedCourse {
   category_id: number;
   category_name: string;
   description: string;
-  syllabus: string;
+  brief: string;
   image: string;
   price: number;
   level: string;

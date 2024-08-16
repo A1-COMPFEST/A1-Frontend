@@ -24,15 +24,15 @@ export default async function Page({ params }: { params: { id: number } }) {
         <div className="flex flex-col md:flex-row">
           <div className="md:w-2/5 p-6">
             <div className="mb-4">
-              <Image src="/gambar.png" alt="" width={1600} height={900} />
+              <Image src={course.image} alt="" width={1600} height={900} />
             </div>
             <h1 className="text-2xl text-primary font-bold mb-2">
               {course.name}
             </h1>
             <p className="text-sm text-muted-foreground mb-4">
-              Temporary Instructor
+              {course.instructor_name}
             </p>
-            <p className="text-sm mb-4">{course.syllabus}</p>
+            <p className="text-sm mb-4">{course.brief}</p>
             <div className="flex items-center mb-4 gap-2">
               <span className="font-semibold">4.0</span>
               <span className="text-yellow-400">★★★★</span>
