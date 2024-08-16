@@ -67,9 +67,9 @@ export default async function CourseContent({
     userToken
   );
   const reviews = await getReviews(params.courseId, userToken);
-  // const pdfLink = content.file;
-  // console.log(pdfLink);
+  const pdfLink = content.file;
   const assignments = await getAssignments(params.courseId, userToken);
+  
   console.log(assignments.data);
 
   return (
@@ -84,8 +84,8 @@ export default async function CourseContent({
             style={{ height: "60vh" }}
           >
             <embed
-              // src={pdfLink}
-              src="/assets/pdfs/p.pdf"
+              src={pdfLink}
+              // src="/assets/pdfs/p.pdf"
               type="application/pdf"
               width="100%"
               height="100%"
@@ -149,10 +149,38 @@ export default async function CourseContent({
                 </div>
               </div>
             </TabsContent>
+            <TabsContent value="assignment">
+              <div className="p-4 bg-background rounded-lg">
+                <h3 className="text-lg font-medium">Assignment</h3>
+                <div className="grid gap-2 mt-4">
+                  {assignments.map((assignment: Assignment) => (
+                    <Link
+                      href={`/courses/learn/${params.courseId}/assignment/${assignment.id}`}
+                      className="flex items-center justify-between hover:bg-muted/50 px-2 py-1 rounded-md"
+                      prefetch={false}
+                      key={assignment.id}
+                    >
+                      <div className="flex items-center justify-start gap-4">
+                        <BookText className="border-2 border-primary w-8 h-8 min-w-2 text-primary" />
+                        <div className="flex flex-col">
+                          <h2 className="text-md font-semibold">
+                            {assignment.title}
+                          </h2>
+                          <h3 className="text-sm text-primary max-h-5 overflow-hidden">
+                            {assignment.description}
+                          </h3>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
         <div className="flex flex-col gap-6">
-        <div className="p-4 bg-background rounded-lg">
+          <div className="p-4 bg-background rounded-lg">
             <h3 className="text-lg font-medium">Content</h3>
             <div className="grid text-primary gap-2 mt-4">
               {contents.map((content: Content) => (
