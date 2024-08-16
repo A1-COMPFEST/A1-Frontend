@@ -68,7 +68,7 @@ export default function AddMaterialDialog({
                             <Textarea id="description" name="description" required />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
-                            <Label htmlFor="file">File (PDF or MP4, max 10MB)</Label>
+                            <Label htmlFor="file">File (PDF, max 2MB)</Label>
                             <Input id="file" name="file" type="file" accept=".pdf,.mp4" required />
                         </div>
                         <Button type="submit" disabled={loading}>

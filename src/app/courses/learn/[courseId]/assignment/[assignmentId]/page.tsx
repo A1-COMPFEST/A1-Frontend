@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SubmitBox from "@/components/student/assignment/submit-box";
 import axios from "axios";
+import Image from "next/image";
 
 
 
@@ -64,11 +65,11 @@ export default async function AssignmentPage({
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col lg:flex-row items-start justify-center gap-12 ">
-        <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-md lg:min-w-[500px]">
+      <div className="flex flex-col lg:flex-row items-start justify-start gap-12 ">
+        <div className="max-w-2xl mx-auto p-6 lg:min-w-[700px]">
           <div className="flex items-center mb-4">
-            <div className="border-2 border-primary text-primary p-2 rounded-full mr-3">
-              <BookText size={24} />
+            <div className="hidden sm:block sm:flex-shrink-0 sm:w-[40px] sm:h-[40px] mr-4 mb-2 sm:mb-0">
+              <Image src="/assets/instructor/icon-assignment.png" alt="Assignment Icon" width={40} height={40}/>
             </div>
             <h2 className="text-xl text-primary font-bold ">
               {assignmentData.title}

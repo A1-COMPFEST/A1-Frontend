@@ -108,3 +108,13 @@ export async function isLoggedIn() {
   const token = await getUserToken();
   return !!token;
 }
+
+export async function getUserData() {
+  const userCookie = cookies().get("user");
+
+  if (!userCookie) {
+    return null;
+  }
+
+  return JSON.parse(userCookie.value);
+}

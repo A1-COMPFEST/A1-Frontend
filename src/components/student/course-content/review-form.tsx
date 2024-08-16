@@ -83,10 +83,6 @@ export default function ReviewForm({
         <form action={handleSubmit}>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" placeholder="Your name" />
-            </div>
-            <div className="flex flex-col space-y-1.5">
               <Label htmlFor="rating">Rating</Label>
               <Select name="rating">
                 <SelectTrigger id="rating">
