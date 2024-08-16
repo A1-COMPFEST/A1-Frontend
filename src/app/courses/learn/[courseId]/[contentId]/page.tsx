@@ -8,6 +8,7 @@ import ReviewForm from "@/components/student/course-content/review-form";
 import { getUserId, getUserToken } from "@/app/actions/auth/auth-actions";
 import { Assignment, Content, Rating } from "@/app/types";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 async function getContents(courseId: string, token: string) {
   const response = await axios.get(
@@ -148,38 +149,10 @@ export default async function CourseContent({
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="assignment">
-              <div className="p-4 bg-background rounded-lg">
-                <h3 className="text-lg font-medium">Assignment</h3>
-                <div className="grid gap-2 mt-4">
-                  {assignments.map((assignment: Assignment) => (
-                    <Link
-                      href={`/courses/learn/${params.courseId}/assignment/${assignment.id}`}
-                      className="flex items-center justify-between hover:bg-muted/50 px-2 py-1 rounded-md"
-                      prefetch={false}
-                      key={assignment.id}
-                    >
-                      <div className="flex items-center justify-start gap-4">
-                        <BookText className="border-2 border-primary w-8 h-8 min-w-2 text-primary" />
-                        <div className="flex flex-col">
-                          <h2 className="text-md font-semibold">
-                            {assignment.title}
-                          </h2>
-                          <h3 className="text-sm text-primary max-h-5 overflow-hidden">
-                            {assignment.description}
-                          </h3>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-4 h-4" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </TabsContent>
           </Tabs>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="p-4 bg-background rounded-lg">
+        <div className="p-4 bg-background rounded-lg">
             <h3 className="text-lg font-medium">Content</h3>
             <div className="grid text-primary gap-2 mt-4">
               {contents.map((content: Content) => (

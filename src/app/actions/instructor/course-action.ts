@@ -29,7 +29,7 @@ export async function updateCourse(
 ) {
 
     try {
-        const response = await axios.patch(
+        const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}`,
             formData,
             {
