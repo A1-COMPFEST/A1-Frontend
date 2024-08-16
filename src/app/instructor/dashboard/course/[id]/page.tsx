@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import {notFound, redirect} from 'next/navigation';
 import Image from "next/image";
 import { lato } from "@/components/ui/font";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,6 +9,7 @@ import AddMaterialDialog from "@/components/instructor/tabs/materials/add-materi
 import EditMaterialDialog from "@/components/instructor/tabs/materials/edit-materials-dialog";
 import DeleteMaterialDialog from "@/components/instructor/tabs/materials/del-materials-dialog";
 import AddGradeDialog from "@/components/instructor/tabs/submissions/add-grade-dialog";
+import {getUserRole} from "@/app/actions/auth/auth-actions";
 
 type CourseDetailPageProps = {
     params: { id: string };
@@ -112,6 +113,16 @@ const handleDownload = (fileUrl: string) => {
 
 
 export default async function CourseDetailPage({ params, searchParams }: CourseDetailPageProps) {
+    const userRole = await getUserRole();
+
+    if (userRole !== "instructor" || userRole !== "user") {
+        redirect("/auth/sign-in");
+    }
+
+    if (userRole !== "instructor") {
+        redirect("/dashboard");
+    }
+
     const { id } = params;
 
     const courseData = await getCourseData(id);

@@ -20,7 +20,6 @@ async function getInstructorCourse() {
 
 export default async function InstructorPage() {
 
-
   const userRole = await getUserRole();
   if (userRole !== "instructor") {
     redirect("/dashboard");
