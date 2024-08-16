@@ -20,7 +20,7 @@ export async function addMaterial(formData: FormData, courseId: string) {
 
 export async function editMaterial(formData: FormData, courseId: string, materialId: string) {
     try {
-        const response = await axios.patch(
+        const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}/contents/${materialId}`,
             formData,
             {

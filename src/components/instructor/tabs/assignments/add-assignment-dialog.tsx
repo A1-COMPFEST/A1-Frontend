@@ -28,18 +28,18 @@ export default function AddAssignmentDialog({
     const [isOpen, setIsOpen] = useState(false);
 
     const handleSubmit = async (formData: FormData) => {
-        formData.append("category_id", "1");
-
+        setLoading(true);
         try {
             const response = await addAssignment(formData, courseId);
-
             console.log(response);
-            toast.success("Course added successfully!");
+            toast.success("Assignment added successfully!");
+            setIsOpen(false);
             router.refresh();
         } catch (error) {
+            toast.error("An error occurred while adding the assignment");
+            console.error("Error adding new assignment:", error);
+        } finally {
             setLoading(false);
-            toast.error("An error occurred");
-            console.error("Error during adding new course:", error);
         }
     };
 
@@ -69,8 +69,8 @@ export default function AddAssignmentDialog({
                             <Textarea id="description" name="description" required />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
-                            <Label htmlFor="due_date">Due Date</Label>
-                            <Input id="due_date" name="due_date" type="datetime-local" required />
+                            <Label htmlFor="due_date">Due Date (days after course enrollment)</Label>
+                            <Input id="due_date" name="due_date" type="number" placeholder="e.g. 10 for 10 days after course enrolled" required />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
                             <Label htmlFor="task">Task File (PDF or MP4, max 10MB)</Label>

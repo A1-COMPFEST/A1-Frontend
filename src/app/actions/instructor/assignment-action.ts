@@ -20,7 +20,8 @@ export async function addAssignment(formData: FormData, courseId: string) {
 
 export async function editAssignment(formData: FormData, courseId: string, assignmentId: string) {
     try {
-        const response = await axios.put(
+        console.log('Sending data:', Object.fromEntries(formData));
+        const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}/assignments/${assignmentId}`,
             formData,
             {
@@ -29,6 +30,7 @@ export async function editAssignment(formData: FormData, courseId: string, assig
                 },
             }
         );
+        console.log('Response:', response.data);
         return response.data;
     } catch (error) {
         console.error("Error editing assignment:", error);
@@ -36,10 +38,10 @@ export async function editAssignment(formData: FormData, courseId: string, assig
     }
 }
 
-export async function deleteAssignment(courseId: string, assignmentId: string) {
+export async function deleteAssignment(assignmentId: string) {
     try {
         const response = await axios.delete(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${courseId}/assignments/${assignmentId}`
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${assignmentId}`
         );
         return response.data;
     } catch (error) {

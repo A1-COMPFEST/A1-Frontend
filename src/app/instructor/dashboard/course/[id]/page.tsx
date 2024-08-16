@@ -8,6 +8,7 @@ import DelAssignmentDialog from "@/components/instructor/tabs/assignments/del-as
 import AddMaterialDialog from "@/components/instructor/tabs/materials/add-materials-dialog";
 import EditMaterialDialog from "@/components/instructor/tabs/materials/edit-materials-dialog";
 import DeleteMaterialDialog from "@/components/instructor/tabs/materials/del-materials-dialog";
+import AddGradeDialog from "@/components/instructor/tabs/submissions/add-grade-dialog";
 
 type CourseDetailPageProps = {
     params: { id: string };
@@ -46,7 +47,21 @@ async function getStudents(id: string) {
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/enrollment/${id}`
     );
-    return await response.json();
+    const enrollmentData = await response.json();
+    const students = enrollmentData.users;
+
+    // Fetch progress for each student
+    const studentsWithProgress = await Promise.all(
+        students.map(async (student: any) => {
+            const progress = await getStudentProgress(id, student.id);
+            return {
+                ...student,
+                progress: progress ? progress.progress.progress_percentage : null
+            };
+        })
+    );
+
+    return studentsWithProgress;
 }
 
 async function getSubmissions(id: string) {
@@ -80,6 +95,21 @@ async function getSubmissions(id: string) {
     return Promise.all(submissionsPromises);
 }
 
+async function getStudentProgress(courseId: string, userId: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/progress/courses/${courseId}/${userId}`
+    );
+    if (!response.ok) {
+        console.error('Failed to fetch student progress');
+        return null;
+    }
+    return await response.json();
+}
+
+const handleDownload = (fileUrl: string) => {
+    window.open(fileUrl, '_blank');
+};
+
 
 export default async function CourseDetailPage({ params, searchParams }: CourseDetailPageProps) {
     const { id } = params;
@@ -94,7 +124,7 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
     const materials = courseMaterials.contents;
 
     const courseStudents = await getStudents(id);
-    const students = courseStudents.users;
+    const students = courseStudents;
 
     const submissionsData = await getSubmissions(id);
 
@@ -178,7 +208,7 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                         {students?.map((student: any) => (
                             <div key={student.id} className="flex justify-between mb-2">
                                 <span>{student.name}</span>
-                                <span>{student.id}%</span>
+                                <span>{student.progress !== null ? `${Math.round(student.progress)}%` : '0%'}</span>
                             </div>
                         ))}
                     </div>
@@ -195,7 +225,12 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                                         </div>
                                         <div className="flex-grow mb-2 sm:mb-0 w-full sm:w-auto">
                                             <h3 className="font-bold">{assignment.title}</h3>
-                                            <p className="mb-2 sm:mb-0 whitespace-pre-wrap">{assignment.description}</p>
+                                            <p className="mb-2 sm:mb-0 whitespace-pre-wrap">
+                                                {assignment.submissions.length > 0 ?
+                                                    `Submissions received: ${assignment.submissions.length}` :
+                                                    "No submissions received yet"
+                                                }
+                                            </p>
                                         </div>
                                         {assignment.submissions.length > 0 && (
                                             <div className="ml-2">
@@ -211,8 +246,25 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                                                 <span className={`text-black`}>{submission.studentName}</span>
                                                 <div>
                                                     <span className="mr-2">Status: {submission.status}</span>
-                                                    <span className="mr-2">Grade: {submission.grade}</span>
-                                                    <a href={submission.task} target="_blank" rel="noopener noreferrer" className="bg-blue-500 text-white px-2 py-1 rounded">View Submission</a>
+                                                    <span className="mr-2">Grade: {submission.grade !== null ? submission.grade : "~"}</span>
+                                                    {/*{submission.task && (*/}
+                                                    {/*    <button*/}
+                                                    {/*        onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_API_BASE_URL}/answers/${submission.assignment_id}/${submission.task}`)}*/}
+                                                    {/*        className="mr-2"*/}
+                                                    {/*    >*/}
+                                                    {/*        <Image*/}
+                                                    {/*            src="/assets/instructor/icon-download.png"*/}
+                                                    {/*            alt="Download"*/}
+                                                    {/*            width={20}*/}
+                                                    {/*            height={20}*/}
+                                                    {/*        />*/}
+                                                    {/*    </button>*/}
+                                                    {/*)}*/}
+                                                    <AddGradeDialog
+                                                        assignmentId={assignment.id}
+                                                        answerId={submission.id}
+                                                        currentGrade={submission.grade}
+                                                    />
                                                 </div>
                                             </div>
                                         ))}

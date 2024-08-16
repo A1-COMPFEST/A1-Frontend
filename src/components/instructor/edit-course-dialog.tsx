@@ -190,7 +190,7 @@ export default function EditCourseDialog({
                             />
                         </div>
                         <Button type="submit" disabled={loading}>
-                            Add new Course
+                            Submit
                         </Button>
                     </div>
                 </form>
