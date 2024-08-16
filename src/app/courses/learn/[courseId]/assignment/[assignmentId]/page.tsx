@@ -48,7 +48,7 @@ export default async function AssignmentPage({
   console.log(deadlineData);
 
   const assignment = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${params.assignmentId}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/detail/${params.assignmentId}`,
     { headers: { Authorization: `Bearer ${userToken}` } }
   );
 

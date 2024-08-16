@@ -24,7 +24,6 @@ interface EditAssignmentDialogProps {
 
 export default function DelAssignmentDialog({
     assignmentId,
-    courseId,
     assignmentTitle,
     }: EditAssignmentDialogProps) {
     const router = useRouter();
@@ -34,7 +33,7 @@ export default function DelAssignmentDialog({
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await deleteAssignment(courseId, assignmentId);
+            await deleteAssignment(assignmentId);
             toast.success("Assignment updated successfully!");
             setIsOpen(false);
             router.refresh();

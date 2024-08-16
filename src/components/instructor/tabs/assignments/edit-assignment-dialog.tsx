@@ -24,12 +24,12 @@ interface EditAssignmentDialogProps {
 }
 
 export default function EditAssignmentDialog({
-                                                 assignmentId,
-                                                 courseId,
-                                                 assignmentTitle,
-                                                 assignmentDescription,
-                                                 assignmentDueDate,
-                                             }: EditAssignmentDialogProps) {
+    assignmentId,
+    courseId,
+    assignmentTitle,
+    assignmentDescription,
+    assignmentDueDate,
+    }: EditAssignmentDialogProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -97,11 +97,12 @@ export default function EditAssignmentDialog({
                             />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
-                            <Label htmlFor="due_date">Due Date</Label>
+                            <Label htmlFor="due_date">Due Date (days after course enrollment)</Label>
                             <Input
                                 id="due_date"
                                 name="due_date"
-                                type="datetime-local"
+                                type="number"
+                                placeholder="e.g. 10 for 10 days after course enrolled"
                                 value={dueDate}
                                 onChange={(e) => setDueDate(e.target.value)}
                                 required
