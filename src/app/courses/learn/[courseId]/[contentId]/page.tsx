@@ -69,6 +69,7 @@ export default async function CourseContent({
   // const pdfLink = content.file;
   // console.log(pdfLink);
   const assignments = await getAssignments(params.courseId, userToken);
+  console.log(assignments.data);
 
   return (
     <div className="flex justify-center py-12">
@@ -91,9 +92,16 @@ export default async function CourseContent({
           </div>
           <Tabs defaultValue="assignment">
             <TabsList className="flex w-2/3 max-w-2/3 min-w-min grid-cols-2">
+              <TabsTrigger value="description">Description</TabsTrigger>
               <TabsTrigger value="assignment">Assignment</TabsTrigger>
               <TabsTrigger value="reviews">Student Feedback</TabsTrigger>
             </TabsList>
+            <TabsContent value="description">
+              <div className="p-4 bg-background rounded-lg">
+                <h3 className="text-lg font-medium">Content Description</h3>
+                <p>{content.description}</p>
+              </div>
+            </TabsContent>
             <TabsContent value="reviews">
               <div className="p-4 bg-background rounded-lg">
                 <div className="flex items-center justify-between">
