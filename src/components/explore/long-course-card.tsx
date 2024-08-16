@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
+
 interface LongCourseCardProps {
   id: number;
   name: string;
@@ -22,8 +23,14 @@ export default function LongCourseCard({
   syllabus,
   rating,
 }: LongCourseCardProps) {
-  console.log(rating);
   const roundedRating = Math.round(parseFloat(rating));
+
+  
+  const truncateTitle = (title: string, maxLength: number) => {
+    if (title.length <= maxLength) return title;
+    return title.substr(0, maxLength) + '...';
+  };
+
   return (
     <Link
       href={`/courses/${id}`}
@@ -38,8 +45,8 @@ export default function LongCourseCard({
           className="w-full sm:w-56 h-32 object-cover rounded-lg sm:rounded-l-lg"
         />
         <div className="text-left grid pb-4 flex-grow relative">
-          <h3 className="text-xl font-bold text-gray-800 truncate text-primary">
-            {name}
+          <h3 className="text-xl font-bold text-gray-800 truncate text-primary pr-24">
+            {truncateTitle(name, 50)}
           </h3>
           <p className="text-muted-foreground text-sm pb-1">
             {instructor_name}
@@ -51,15 +58,17 @@ export default function LongCourseCard({
               <FaStar key={index} className="text-yellow-500 mr-1" />
             ))}
           </div>
-          <p className="font-semibold text-sm absolute top-0 right-0">
-            {price.toLocaleString("id-ID", {
-              style: "currency",
-              currency: "IDR",
-            })}
-          </p>
-          <p className="font text-muted-foreground text-xs absolute top-6 right-0">
-            {level}
-          </p>
+          <div className="absolute top-0 right-0 text-right">
+            <p className="font-semibold text-sm">
+              {price.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              })}
+            </p>
+            <p className="font text-muted-foreground text-xs mt-1">
+              {level}
+            </p>
+          </div>
         </div>
       </div>
     </Link>
