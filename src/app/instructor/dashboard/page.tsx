@@ -7,9 +7,9 @@ import EditCourseDialog from "@/components/instructor/edit-course-dialog";
 import DeleteCourseDialog from "@/components/instructor/delete-course-dialog";
 import { redirect } from "next/navigation";
 
-async function getInstructorCourse() {
+async function getInstructorCourse(userId : string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/instructor/5`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/instructor/${userId}`,
     {
         cache: "no-cache",
     }
@@ -21,11 +21,12 @@ async function getInstructorCourse() {
 export default async function InstructorPage() {
 
   const userRole = await getUserRole();
+  const userId = await getUserId();
   if (userRole !== "instructor") {
     redirect("/dashboard");
   }
 
-  const instructorCourses = await getInstructorCourse();
+  const instructorCourses = await getInstructorCourse(userId);
   const instructorId = await getUserId();
 
   const uniqueCategory = await axios.get(
