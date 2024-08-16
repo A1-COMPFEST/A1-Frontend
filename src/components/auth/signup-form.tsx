@@ -87,12 +87,6 @@ export default function SignupForm() {
                 required
               />
             </div>
-            {/* <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="phone" className="text-primary font-semibold">
-                Phone
-              </Label>
-              <Input id="phone" placeholder="Enter your phone number" />
-            </div> */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password" className="text-primary font-semibold">
                 Password

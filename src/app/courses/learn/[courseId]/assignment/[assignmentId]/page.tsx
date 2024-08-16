@@ -38,7 +38,7 @@ export default async function AssignmentPage({
   const userId = await getUserId();
   const userToken = await getUserToken();
   if (!userToken) {
-    redirect("/signin");
+    redirect("/auth/sign-in");
   }
   
   const deadline = await axios.get(

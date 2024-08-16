@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   const userToken = await getUserToken();
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-5xl mx-auto shadow-md rounded-sm overflow-hidden">
+      <div className="max-w-5xl mx-auto overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-2/5 p-6">
             <div className="mb-4">

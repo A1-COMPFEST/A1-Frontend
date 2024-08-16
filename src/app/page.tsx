@@ -76,7 +76,9 @@ export default async function Home() {
                   globally. Join Udemy as an instructor and start teaching what
                   you love today!
                 </p>
-                <Button className="mx-auto md:mx-0">Start Today</Button>
+                <Link href={`/auth/sign-up`}>
+                  <Button className="mx-auto md:mx-0">Start Today</Button>
+                </Link>
               </div>
             </div>
           </div>

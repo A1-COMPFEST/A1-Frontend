@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import axios from "axios";
 import ReviewForm from "@/components/student/course-content/review-form";
-import { getUserId, getUserToken } from "@/app/actions/auth/auth-actions";
+import {getUserId, getUserRole, getUserToken} from "@/app/actions/auth/auth-actions";
 import { Assignment, Content, Rating } from "@/app/types";
 import { redirect } from "next/navigation";
 import Image from "next/image";
@@ -60,6 +60,12 @@ export default async function CourseContent({
   if (!userToken) {
     redirect("/auth/sign-in");
   }
+
+  const userRole = await getUserRole();
+  if (userRole !== "user") {
+    redirect("/");
+  }
+
   const contents = await getContents(params.courseId, userToken);
   const content = await getContent(
     params.courseId,
@@ -101,6 +107,36 @@ export default async function CourseContent({
               <div className="p-4 bg-background rounded-lg">
                 <h3 className="text-lg font-medium">Content Description</h3>
                 <p>{content.description}</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="assignment">
+              <div className="p-4 bg-background rounded-lg">
+                <h3 className="text-lg font-medium">Assignment</h3>
+                <div className="grid gap-2 mt-4">
+                  {assignments.map((assignment: Assignment) => (
+                      <Link
+                          href={`/courses/learn/${params.courseId}/assignment/${assignment.id}`}
+                          className="flex items-center justify-between hover:bg-muted/50 px-2 py-1 rounded-md"
+                          prefetch={false}
+                          key={assignment.id}
+                      >
+                        <div className="flex items-center justify-start gap-4">
+                          <div className="hidden sm:block sm:flex-shrink-0 sm:w-[40px] sm:h-[40px] mr-4 mb-2 sm:mb-0">
+                            <Image src="/assets/instructor/icon-assignment.png" alt="Assignment Icon" width={40} height={40}/>
+                          </div>
+                          <div className="flex flex-col">
+                            <h2 className="text-md font-semibold">
+                              {assignment.title}
+                            </h2>
+                            <h3 className="text-sm text-primary max-h-5 overflow-hidden">
+                              {assignment.description}
+                            </h3>
+                          </div>
+                        </div>
+                        <ChevronRight className="w-4 h-4"/>
+                      </Link>
+                  ))}
+                </div>
               </div>
             </TabsContent>
             <TabsContent value="reviews">
