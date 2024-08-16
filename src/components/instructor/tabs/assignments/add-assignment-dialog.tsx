@@ -73,7 +73,7 @@ export default function AddAssignmentDialog({
                             <Input id="due_date" name="due_date" type="number" placeholder="e.g. 10 for 10 days after course enrolled" required />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
-                            <Label htmlFor="task">Task File (PDF or MP4, max 10MB)</Label>
+                            <Label htmlFor="task">Task File (PDF, max 2MB)</Label>
                             <Input id="task" name="task" type="file" accept=".pdf,.mp4" required />
                         </div>
                         <Button type="submit" disabled={loading}>

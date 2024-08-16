@@ -109,7 +109,7 @@ export default function EditAssignmentDialog({
                             />
                         </div>
                         <div className="grid grid-cols-1 items-center gap-2">
-                            <Label htmlFor="task">Task File (PDF or MP4, max 10MB)</Label>
+                            <Label htmlFor="task">Task File (PDF, max 2MB)</Label>
                             <Input id="task" name="task" type="file" accept=".pdf,.mp4" />
                         </div>
                         <Button type="submit" disabled={loading}>

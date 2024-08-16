@@ -208,7 +208,7 @@ export default async function CourseDetailPage({ params, searchParams }: CourseD
                         {students?.map((student: any) => (
                             <div key={student.id} className="flex justify-between mb-2">
                                 <span>{student.name}</span>
-                                <span>{student.progress !== null ? `${Math.round(student.progress)}%` : '0%'}</span>
+                                <span>Progress: {student.progress !== null ? `${Math.round(student.progress)}%` : '0%'}</span>
                             </div>
                         ))}
                     </div>
