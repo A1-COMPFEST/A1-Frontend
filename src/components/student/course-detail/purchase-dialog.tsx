@@ -37,6 +37,7 @@ export default function BuyCourseDialog({
       const response = await purchaseCourse(userId, token, courseId);
       console.log(response);
       toast.success("Purchase successful");
+      router.push("/dashboard");
       router.refresh();
     } catch (error : any) {
       toast.error(error.message);

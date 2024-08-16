@@ -103,3 +103,21 @@ export async function addAnswer (formData : FormData, token: string, assignmentI
     throw error;
   }
 }
+
+export async function updateProgress(courseId: string, contentId: string, userId: string, isFinish: boolean, token: string) {
+  try {
+    const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/progress/${courseId}/${contentId}/${userId}`,
+        { isFinish },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating progress:", error);
+    throw error;
+  }
+}

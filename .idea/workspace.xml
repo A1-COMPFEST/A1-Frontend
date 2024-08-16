@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a1b0b6d7-9779-4cab-b629-ef5e802c7003" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/courses/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/courses/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/courses/learn/[courseId]/[contentId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/courses/learn/[courseId]/[contentId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/courses/learn/[courseId]/assignment/[assignmentId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/courses/learn/[courseId]/assignment/[assignmentId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/instructor/dashboard/course/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/instructor/dashboard/course/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/signup-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/signup-form.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +96,7 @@
       <workItem from="1723611338768" duration="12338000" />
       <workItem from="1723688750549" duration="12127000" />
       <workItem from="1723745978395" duration="2908000" />
-      <workItem from="1723796462218" duration="3821000" />
+      <workItem from="1723796462218" duration="5627000" />
     </task>
     <servers />
   </component>
