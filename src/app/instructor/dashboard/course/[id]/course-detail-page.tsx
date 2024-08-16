@@ -75,6 +75,11 @@ async function getSubmissions(id: string) {
     );
     const assignments = await response.json();
 
+    if (!assignments.assignments) {
+        console.error("Assignments data is not in the expected format:", assignments);
+        return [];
+    }
+
     const submissionsPromises = assignments.assignments.map(async (assignment: any) => {
         const enrollmentResponse = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/enrollment/${id}`
