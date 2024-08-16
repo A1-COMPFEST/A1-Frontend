@@ -31,7 +31,7 @@ export default function LongCourseCard({
     >
       <div key={id} className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full">
         <Image
-          src="/gambar.png"
+          src={image}
           alt={name}
           width={300}
           height={170}

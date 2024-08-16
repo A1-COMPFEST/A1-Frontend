@@ -28,7 +28,7 @@ export default function CourseCard({
         className="bg-white shadow-md p-2 transform transition duration-500 hover:bg-secondary hover:shadow-xl w-full max-w-xs"
       >
         <Image
-          src="/gambar.png"
+          src={image}
           alt={name}
           width={300}
           height={170}
