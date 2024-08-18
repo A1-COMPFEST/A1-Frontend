@@ -68,7 +68,13 @@ export default async function CourseContent({
   }
 
   const contents = await getContents(params.courseId, userToken);
-  const content = await getContent(params.courseId, params.contentId, userToken);
+  // const content = await getContent(params.courseId, params.contentId, userToken);
+  let content;
+  if (params.contentId === "1") {
+    content = contents[0];
+  } else {
+    content = await getContent(params.courseId, params.contentId, userToken);
+  }
   const reviews = await getReviews(params.courseId, userToken);
   const pdfLink = content.file;
   const assignments = await getAssignments(params.courseId, userToken);
